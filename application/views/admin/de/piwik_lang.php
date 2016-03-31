@@ -35,9 +35,10 @@ $sLangName  = "Deutsch";
 // -------------------------------
 // RESOURCE IDENTITFIER = STRING
 // -------------------------------
+$css = '<style type="text/css">.groupExp a.rc b {font-size:medium;color:#ff3600;}.groupExp dt input.txt {width:430px !important} .groupExp dl {display:block !important;} input.confinput {position:fixed;top:20px;right:70px;background:#008B2D;padding:10px 25px;color:white;border:1px solid black;cursor:pointer;font-size:125%;} input.confinput:hover {outline:3px solid #ff3600;} .groupExp dt textarea.txtfield {width:430px;height:150px;}</style>';
 $aLang = array(
 'charset' => 'UTF-8',
-'SHOP_MODULE_GROUP_blaPiwik_Main' => 'Piwik Konfiguration',
+'SHOP_MODULE_GROUP_blaPiwik_Main' => $css.'Piwik Konfiguration',
 'SHOP_MODULE_blaPiwik_sUrl' => '<h3>Piwik Server URL</h3><em>Hier die URL zu Ihrem Piwik Server eintragen.</em><br><b>Format:</b><i> ohne http:// bzw. https:// und ohne abschliessendem /</i><br><b>Bsp:</b> <i>piwik.domain.tld</i>',
 'SHOP_MODULE_blaPiwik_iPageid' => '<h3>Piwik Seiten-ID</h3><em>Tragen Sie hier die Piwik Seiten-ID ein.</em>',
 'SHOP_MODULE_blaPiwik_iNewsgoalid' => '<h3>Newsletter Ziel-ID</h3><em>Wenn Sie in Piwik ein Ziel für eine Newsletterbestellung definiert haben, tragen Sie hier die Ziel-ID ein. Sollte dies nicht benötigt werden tragen Sie eine 0 ein.</em>',

@@ -35,9 +35,10 @@ $sLangName  = "English";
 // -------------------------------
 // RESOURCE IDENTITFIER = STRING
 // -------------------------------
+$css = '<style type="text/css">.groupExp a.rc b {font-size:medium;color:#ff3600;}.groupExp dt input.txt {width:430px !important} .groupExp dl {display:block !important;} input.confinput {position:fixed;top:20px;right:70px;background:#008B2D;padding:10px 25px;color:white;border:1px solid black;cursor:pointer;font-size:125%;} input.confinput:hover {outline:3px solid #ff3600;} .groupExp dt textarea.txtfield {width:430px;height:150px;}</style>';
 $aLang = array(
 'charset' => 'UTF-8',
-'SHOP_MODULE_hdiPiwik_custindexpayment' => 'Piwik visit-scope index, the number from 1 to 5 where the payment method custom variable is stored (set 0 to deactivate)',
+'SHOP_MODULE_hdiPiwik_custindexpayment' => $css.'Piwik visit-scope index, the number from 1 to 5 where the payment method custom variable is stored (set 0 to deactivate)',
 'SHOP_MODULE_GROUP_blaPiwik_Main' => 'Piwik Configuration',
 'SHOP_MODULE_blaPiwik_sUrl' => '<h3>Piwik Server URL</h3><em>Insert here the url of your Piwik server.</em><br><b>Format:</b><i> without http:// or https:// and without trailing /</i><br><b>e.g.:</b> <i>piwik.domain.tld</i>',
 'SHOP_MODULE_blaPiwik_iPageid' => '<h3>Your Piwik site ID</h3><em>Insert here the Piwik site ID.</em>',
