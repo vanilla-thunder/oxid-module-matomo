@@ -1,8 +1,7 @@
 <?php
 /**
- * Piwik Tracking Integration for OXID eShop
- * Copyright (C) 2014-2016 bestlife AG
- * Copyright (C) 2011-2014 HEINER DIRECT GmbH & Co. KG
+ * Piwik Analytix for OXID eShop CE
+ * Copyright (C) 2016  bestlife AG
  * info:  oxid@bestlife.ag
  *
  * This program is free software: you can redistribute it and/or modify
@@ -19,15 +18,11 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  * @author      bestlife AG <oxid@bestlife.ag>
- * @author      Klaus Weidenbach (bestlife AG)
- * @author      Marat Bedoev (bestlife AG)
- * @author      Klaus Weidenbach (HEINER DIRECT GmbH & Co. KG)
- * @author      Rafael Dabrowski (HEINER DIRECT GmbH & Co. KG)
- * @author      Marat Bedoev (HEINER DIRECT GmbH & Co. KG)
+ * @author      Klaus Weidenbach
+ * @author      Rafael Dabrowski
+ * @author      Marat Bedoev
  * @link        http://www.bestlife.ag
  *
- * @copyright   bestlife AG 2014
- * @copyright   HEINER DIRECT GmbH & Co. KG 2012-2014
  * @license     GPLv3
  */
 

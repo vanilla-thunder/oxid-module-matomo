@@ -1,8 +1,7 @@
 <?php
 /**
- * Piwik Tracking Integration for OXID eShop
- * Copyright (C) 2014-2016 bestlife AG
- * Copyright (C) 2011-2014 HEINER DIRECT GmbH & Co. KG
+ * Piwik Analytix for OXID eShop CE
+ * Copyright (C) 2016  bestlife AG
  * info:  oxid@bestlife.ag
  *
  * This program is free software: you can redistribute it and/or modify
@@ -19,15 +18,11 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  * @author      bestlife AG <oxid@bestlife.ag>
- * @author      Klaus Weidenbach (bestlife AG)
- * @author      Marat Bedoev (bestlife AG)
- * @author      Klaus Weidenbach (HEINER DIRECT GmbH & Co. KG)
- * @author      Rafael Dabrowski (HEINER DIRECT GmbH & Co. KG)
- * @author      Marat Bedoev (HEINER DIRECT GmbH & Co. KG)
+ * @author      Klaus Weidenbach
+ * @author      Rafael Dabrowski
+ * @author      Marat Bedoev
  * @link        http://www.bestlife.ag
  *
- * @copyright   bestlife AG 2014
- * @copyright   HEINER DIRECT GmbH & Co. KG 2012-2014
  * @license     GPLv3
  */
 
@@ -38,8 +33,7 @@ $sLangName  = "English";
 $css = '<style type="text/css">.groupExp a.rc b {font-size:medium;color:#ff3600;}.groupExp dt input.txt {width:430px !important} .groupExp dl {display:block !important;} input.confinput {position:fixed;top:20px;right:70px;background:#008B2D;padding:10px 25px;color:white;border:1px solid black;cursor:pointer;font-size:125%;} input.confinput:hover {outline:3px solid #ff3600;} .groupExp dt textarea.txtfield {width:430px;height:150px;}</style>';
 $aLang = array(
 'charset' => 'UTF-8',
-'SHOP_MODULE_hdiPiwik_custindexpayment' => $css.'Piwik visit-scope index, the number from 1 to 5 where the payment method custom variable is stored (set 0 to deactivate)',
-'SHOP_MODULE_GROUP_blaPiwik_Main' => 'Piwik Configuration',
+'SHOP_MODULE_GROUP_blaPiwik_Main' => $css.'Piwik Configuration',
 'SHOP_MODULE_blaPiwik_sUrl' => '<h3>Piwik Server URL</h3><em>Insert here the url of your Piwik server.</em><br><b>Format:</b><i> without http:// or https:// and without trailing /</i><br><b>e.g.:</b> <i>piwik.domain.tld</i>',
 'SHOP_MODULE_blaPiwik_iPageid' => '<h3>Your Piwik site ID</h3><em>Insert here the Piwik site ID.</em>',
 'SHOP_MODULE_blaPiwik_iNewsgoalid' => '<h3>Newsletter Goal ID</h3><em>If you defined a goal in Piwik for a successfull newsletter activation, insert this goal ID here. (set 0 to disable this feature)</em>',
