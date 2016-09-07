@@ -1,0 +1,25 @@
+{
+  "name": "bla-piwik-dev",
+  "version": "2.2.1",
+  "description": "Piwik Analytix for OXID eShop CE",
+  "author": "",
+  "company": "bestlife AG",
+  "email": "oxid@bestlife.ag",
+  "url" : "https://github.com/vanilla-thunder/bla-piwik",
+  "license": "GPL-3.0",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/vanilla-thunder/bla-piwik.git"
+  },
+  "bugs": {
+    "url": "https://github.com/vanilla-thunder/bla-piwik/issues"
+  },
+  "keywords": [
+    "piwik",
+    "oxid"
+  ],
+  "dependencies": {
+    "replace": "*",
+    "request": "*"
+  }
+}
