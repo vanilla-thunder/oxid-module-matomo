@@ -18,8 +18,8 @@
  *
  * @author      bestlife AG <oxid@bestlife.ag>
  * @author      Klaus Weidenbach
- * @author      Marat Bedoev
  * @author      Rafael Dabrowski
+ * @author      Marat Bedoev
  * @link        http://www.bestlife.ag
  *
  * @license     GPLv3

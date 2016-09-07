@@ -19,8 +19,8 @@
  *
  * @author      bestlife AG <oxid@bestlife.ag>
  * @author      Klaus Weidenbach
- * @author      Marat Bedoev
  * @author      Rafael Dabrowski
+ * @author      Marat Bedoev
  * @link        http://www.bestlife.ag
  *
  * @license     GPLv3
@@ -37,7 +37,7 @@ $aModule = array(
       'de' => 'Fügt einen Piwik Tracking Code hinzu, um eine Webanalyse ihres Shops zu erhalten. Sie benötigen Zugriff auf eine <a href="http://www.piwik.org" target="_blank">Piwik</a> Installation, um dies verwenden zu können.<br><br><b>UPDATE HINWEIS</b><br>Sollten sie von einer früheren Version dieses Moduls updaten (<2.0), passen sie bitte die Modulein&shy;stellungen an!<br><b>UPDATE HINWEIS für v1.1</b><br>Es wird die seit Piwik 1.9 enthaltene <i>Interne Suche</i> verwendet und daher ist das Tracking über die Benutzer&shy;definierten Variablen nicht mehr verfügbar!'
    ),
    'thumbnail'   => 'bestlife.png',
-   'version'     => '###_VERSON_###',
+   'version'     => '###_VERSION_###',
    'author'      => '###_AUTHOR_### ###_COMPANY_###',
    'email'       => '###_EMAIL_###',
    'url'         => '###_URL_###',
