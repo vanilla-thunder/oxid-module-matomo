@@ -29,8 +29,8 @@ shell("cp -r application _module/");
 shell("cp -r extend _module/");
 shell("cp metadata.php _module/metadata.php");
 shell("cp LICENSE _module/LICENSE");
-shell("cp README _module/README");
-shell("cp changelog _module/changelog");
+shell("cp README.md _module/README.md");
+shell("cp changelog.md _module/changelog.md");
 console.log("     new files copied");
 
 // compile some files
