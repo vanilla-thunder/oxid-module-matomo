@@ -1,6 +1,6 @@
 ## ###_MODULE_###
 by ###_AUTHOR_### ###_COMPANY_### <###_EMAIL_###>  
-module version ###_VERSION_###
+module version ###_VERSION_###  
 ###_URL_###
 
 ### LICENSE AGREEMENT
