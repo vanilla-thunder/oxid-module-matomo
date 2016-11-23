@@ -27,8 +27,9 @@
  */
 
 class oxviewconfig_piwik extends oxviewconfig_piwik_parent {
-	
+
 	protected $_piwikUrl = null;
+	protected $_piwikToken = null;
 	protected $_piwikPageId = null;
 	protected $_piwikMaxCustVar = null;
 	protected $_piwikNlgoalId = null;
@@ -37,6 +38,7 @@ class oxviewconfig_piwik extends oxviewconfig_piwik_parent {
 	protected $_piwikUseUserID = null;
 	protected $_piwikFirstReferrerConv = null;
 	protected $_piwikEnableJSError = null;
+	protected $_originCountry = null;
 
 	/**
 	 * Returns the Piwik server URL.
@@ -49,6 +51,18 @@ class oxviewconfig_piwik extends oxviewconfig_piwik_parent {
 			$this->_piwikUrl = $cfg->getConfigParam( 'blaPiwik_sUrl' );
 		}
 		return $this->_piwikUrl;
+	}
+	/**
+	 * Returns Piwik Auth Token.
+	 *
+	 * @return str
+	 */
+	private function _getPiwikToken() {
+		if ( $this->_piwikToken === null ) {
+			$cfg = oxRegistry::get( 'oxConfig' );
+			$this->_piwikToken = $cfg->getConfigParam( 'blaPiwik_sToken' );
+		}
+		return $this->_piwikToken;
 	}
 
 	/**
@@ -286,5 +300,15 @@ class oxviewconfig_piwik extends oxviewconfig_piwik_parent {
 	 */
 	public function addPiwikParamMapPage() {
 		return $this->_getPiwikParamMap( 'page' );
+	}
+
+	public function getCountryByIP() {
+		if ( $this->_originCountry === null && $this->_getPiwikToken() )
+		{
+			$requestUrl = 'https://'.$this->getPiwikUrl().'/?module=API&method=UserCountry.getLocationFromIP&ip='.$_SERVER['REMOTE_ADDR'];
+			$requestUrl .= "&format=PHP&token_auth=".$this->_getPiwikToken();
+			$this->_originCountry = (object) unserialize(file_get_contents($requestUrl))[0];
+		}
+		return $this->_originCountry->country_code;
 	}
 }

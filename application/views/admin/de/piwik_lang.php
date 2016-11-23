@@ -35,6 +35,7 @@ $aLang = array(
 'charset' => 'UTF-8',
 'SHOP_MODULE_GROUP_blaPiwik_Main' => $css.'Piwik Konfiguration',
 'SHOP_MODULE_blaPiwik_sUrl' => '<h3>Piwik Server URL</h3><em>Hier die URL zu Ihrem Piwik Server eintragen.</em><br><b>Format:</b><i> ohne http:// bzw. https:// und ohne abschliessendem /</i><br><b>Bsp:</b> <i>piwik.domain.tld</i>',
+'SHOP_MODULE_blaPiwik_sToken' => '<h3>Auth Token</h3><em>Kann unter Administration -> Benutzer vom entsprechenden Benutzer kopiert werden</em>',
 'SHOP_MODULE_blaPiwik_iPageid' => '<h3>Piwik Seiten-ID</h3><em>Tragen Sie hier die Piwik Seiten-ID ein.</em>',
 'SHOP_MODULE_blaPiwik_iNewsgoalid' => '<h3>Newsletter Ziel-ID</h3><em>Wenn Sie in Piwik ein Ziel für eine Newsletterbestellung definiert haben, tragen Sie hier die Ziel-ID ein. Sollte dies nicht benötigt werden tragen Sie eine 0 ein.</em>',
 'SHOP_MODULE_blaPiwik_iMaxCustVar' => '<h3>Anzahl benutzerdefinierter Variablen</h3><em>Piwik erlaubt standardmässig nur 5 benutzerdefinierte Variablen pro Scope. Dies kann in der Piwik Konfiguration erweitert werden. Ändern sie diesen Wert nur wenn sie sich sicher sind und diese Anleitung ausgeführt haben <a href="http://piwik.org/faq/how-to/faq_17931/" target="_blank">http://piwik.org/faq/how-to/faq_17931/</a>.</em>',

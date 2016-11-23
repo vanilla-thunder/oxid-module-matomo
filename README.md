@@ -1,9 +1,7 @@
 ## ###_MODULE_###
 by ###_AUTHOR_### ###_COMPANY_### <###_EMAIL_###>
+module version ###_VERSION_###
 ###_URL_###
-### module version ###_VERSION_###
-
-## more info here: [http:/marat.ws/bla-piwik-analytics-fuer-oxid-eshop/](http:/marat.ws/bla-piwik-analytics-fuer-oxid-eshop/)
 
 ### LICENSE AGREEMENT
    ###_MODULE_###  

@@ -1,11 +1,11 @@
 {
   "name": "bla-piwik-dev",
-  "version": "2.2.1",
+  "version": "2.2.3",
   "description": "Piwik Analytix for OXID eShop CE",
   "author": "",
   "company": "bestlife AG",
   "email": "oxid@bestlife.ag",
-  "url" : "https://github.com/vanilla-thunder/bla-piwik",
+  "url" : "https://marat.ws/piwik-analytics-fuer-oxid-eshop/",
   "license": "GPL-3.0",
   "repository": {
     "type": "git",
