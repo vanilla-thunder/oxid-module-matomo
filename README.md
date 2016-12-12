@@ -1,7 +1,7 @@
 ## Piwik Analytix for OXID eShop CE
 by  bestlife AG <oxid@bestlife.ag>  
 module version 2.2.3
-https://marat.ws/piwik-analytics-fuer-oxid-eshop/
+
 
 ### LICENSE AGREEMENT
    Piwik Analytix for OXID eShop CE  
