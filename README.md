@@ -1,12 +1,12 @@
-## ###_MODULE_###
-by ###_AUTHOR_### ###_COMPANY_### <###_EMAIL_###>  
-module version ###_VERSION_###  
-###_URL_###
+## ___MODULE___
+by ___AUTHOR___ ___COMPANY___ <___EMAIL___>  
+module version ___VERSION___  
+___URL___
 
 ### LICENSE AGREEMENT
-   ###_MODULE_###  
-   Copyright (C) ###_YEAR_### ###_COMPANY_###  
-   info:  ###_EMAIL_###  
+   ___MODULE___  
+   Copyright (C) ___YEAR___ ___COMPANY___  
+   info:  ___EMAIL___  
   
    This program is free software;  
    you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation;

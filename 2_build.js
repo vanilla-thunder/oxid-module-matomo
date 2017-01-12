@@ -47,7 +47,7 @@ var replaces = {
 for(var x in replaces)
 {
     replace({
-        regex: "###_"+x+"_###",
+        regex: "___"+x+"___",
         replacement: replaces[x],
         paths: ['./_module'],
         recursive: true,
