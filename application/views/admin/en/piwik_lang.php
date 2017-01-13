@@ -34,7 +34,7 @@ $css = '<style type="text/css">.groupExp a.rc b {font-size:medium;color:#ff3600;
 $aLang = [
     'charset'                                     => 'UTF-8',
     'SHOP_MODULE_GROUP_blaPiwik_Main'             => $css . 'Piwik Configuration',
-    'SHOP_MODULE_blaPiwik_debug'                  => 'Debug Mode (display Piwik Tracking variables in template',
+    'SHOP_MODULE_blaPiwik_debug'                  => 'Debug Mode (display Piwik Tracking variables in template for shop admins)',
     'SHOP_MODULE_blaPiwik_sUrl'                   => '<h3>Piwik Server URL</h3><em>Insert here the url of your Piwik server.</em><br><b>Format:</b><i> without http:// or https:// and without trailing /</i><br><b>e.g.:</b> <i>piwik.domain.tld</i>',
     'SHOP_MODULE_blaPiwik_iPageid'                => '<h3>Your Piwik site ID</h3><em>Insert here the Piwik site ID.</em>',
     'SHOP_MODULE_blaPiwik_iNewsgoalid'            => '<h3>Newsletter Goal ID</h3><em>If you defined a goal in Piwik for a successfull newsletter activation, insert this goal ID here. (set 0 to disable this feature)</em>',

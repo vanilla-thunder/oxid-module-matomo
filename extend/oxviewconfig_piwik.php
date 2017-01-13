@@ -30,7 +30,7 @@ class oxviewconfig_piwik extends oxviewconfig_piwik_parent
 {
     public function piwikdebug()
     {
-        return oxRegistry::getConfig()->getConfigParam("blaPiwik_debug");
+        return ( oxRegistry::getConfig()->getConfigParam("blaPiwik_debug") && oxRegistry::getConfig()->getUser()->oxuser__oxrights->value == "malladmin" ) ? true : false ;
     }
 
     /**
@@ -365,5 +365,20 @@ class oxviewconfig_piwik extends oxviewconfig_piwik_parent
         }
 
         return $this->_originCountry->country_code;
+    }
+
+    public function getAllPiwikCtSettings()
+    {
+        return oxDb::getDb()->GetCol('SELECT SUBSTR(oxvarname,13) FROM oxconfig WHERE oxmodule = "module:bla-piwik" AND oxvarname LIKE "blaPiwik_ct_%"');
+    }
+    /**
+     * returns settings for piwik content tracking
+     *
+     * @param $var
+     * @return mixed
+     */
+    public function getPiwikCtSetting($var)
+    {
+        return oxRegistry::getConfig()->getConfigParam("blaPiwik_ct_{$var}");
     }
 }

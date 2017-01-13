@@ -178,5 +178,4 @@
 [{else}]
     <script type="text/javascript">[{$smarty.capture.piwikscript|strip}]</script>
 [{/if}]
-
 <!-- End Piwik Code -->

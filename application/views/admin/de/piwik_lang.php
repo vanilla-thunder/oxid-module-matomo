@@ -34,7 +34,7 @@ $css = '<style type="text/css">.groupExp a.rc b {font-size:medium;color:#ff3600;
 $aLang = [
     'charset'                                     => 'UTF-8',
     'SHOP_MODULE_GROUP_blaPiwik_Main'             => $css . 'Piwik Konfiguration',
-    'SHOP_MODULE_blaPiwik_debug'                  => 'Debug Modus (zeigt Piwik Tracking Variablen im Template an',
+    'SHOP_MODULE_blaPiwik_debug'                  => 'Debug Modus (zeigt für Shop-Admins Piwik Tracking Variablen im Template an)',
     'SHOP_MODULE_blaPiwik_sUrl'                   => '<h3>Piwik Server URL</h3><em>Hier die URL zu Ihrem Piwik Server eintragen.</em><br><b>Format:</b><i> ohne http:// bzw. https:// und ohne abschliessendem /</i><br><b>Bsp:</b> <i>piwik.domain.tld</i>',
     'SHOP_MODULE_blaPiwik_sToken'                 => '<h3>Auth Token</h3><em>Kann unter Administration -> Benutzer vom entsprechenden Benutzer kopiert werden</em>',
     'SHOP_MODULE_blaPiwik_iPageid'                => '<h3>Piwik Seiten-ID</h3><em>Tragen Sie hier die Piwik Seiten-ID ein.</em>',
