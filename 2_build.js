@@ -17,12 +17,10 @@ var shell = function (command) {
 // cleanup
 shell("rm -rf _module/application");
 shell("rm -rf _module/extend");
-shell("rm -rf _master/copy_this/modules/bla/bla-piwik");
+shell("rm -rf _master/copy_this/modules/bla/"+p.name);
 console.log("");
 console.log("     cleanup finished");
 
-// oxversion
-r('http://mb-dev.de/v/?raw=1&v=' + p.version).pipe(fs.createWriteStream('_module/version.jpg'));
 
 // copy files
 shell("cp -r application _module/");
@@ -35,8 +33,9 @@ console.log("     new files copied");
 
 // compile some files
 var replaces = {
+    'NAME': p.name,
     'MODULE': p.description,
-    'VERSION': p.version,
+    'VERSION': p.version+' '+new Date().toLocaleDateString(),
     'AUTHOR': p.author,
     'COMPANY': p.company,
     'EMAIL': p.email,
@@ -60,9 +59,9 @@ for(var x in replaces)
 process.on('exit', function (code) {
     console.log("     replacing complete");
     // copy module to master
-    shell("cp -r _module _master/copy_this/modules/bla/bla-piwik");
-    shell("rm -rf _master/copy_this/modules/bla/bla-piwik/.git");
-    shell("cp _module/README _master/README");
+    shell("cp -r _module _master/copy_this/modules/bla/"+p.name);
+    shell("rm -rf _master/copy_this/modules/bla/"+p.name+"/.git");
+    shell("cp _module/README.md _master/README.md");
     console.log("");
     console.log("     build complete! made my day!");
     console.log("");
