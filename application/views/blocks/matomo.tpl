@@ -25,13 +25,13 @@
  * @license     GPLv3
  *}]
 [{$smarty.block.parent}]
-[{assign var="piwikdebug" value=$oViewConf->piwikdebug()}]
-<!-- Piwik Code included through bla-piwik -->
-[{capture name="piwikscript"}]
+[{assign var="matomodebug" value=$oViewConf->matomodebug()}]
+<!-- Matomo Code included through bla-matomo -->
+[{capture name="matomoscript"}]
     var _paq = _paq || [];
-    [{if $piwikdebug}]_paq.push(['setDoNotTrack', false]);[{/if}]
+    [{if $matomodebug}]_paq.push(['setDoNotTrack', false]);[{/if}]
 
-    [{* User ID, available since Piwik >= 2.7.0 *}]
+    [{* User ID, available since Matomo >= 2.7.0 *}]
     [{if $oViewConf->getEnableUserID() && $oxcmp_user}]
         [{* TODO: replace somesalt with a shop unique one or from module settings *}]
         _paq.push(['setUserId', '[{$oxcmp_user->oxuser__oxcustnr->value}]']);
@@ -39,13 +39,13 @@
     [{* general tracking stuff *}]
     _paq.push(['setDocumentTitle', '[{$oViewConf->getDocumentTitle($oView)}]']);
 
-    [{* First Referrer Conversion Attribution, available since Piwik >= 1.2.0 *}]
+    [{* First Referrer Conversion Attribution, available since Matomo >= 1.2.0 *}]
     [{if $oViewConf->getFirstReferrerConv()}]
         _paq.push(['setConversionAttributionFirstReferrer', true]);
     [{/if}]
 
-    [{ $oViewConf->addPiwikParamMapVisit() }][{*Additional configured custom variables visit-scope*}]
-    [{ $oViewConf->addPiwikParamMapPage() }][{*Additional configured custom variables page-scope*}]
+    [{ $oViewConf->addMatomoParamMapVisit() }][{*Additional configured custom variables visit-scope*}]
+    [{ $oViewConf->addMatomoParamMapPage() }][{*Additional configured custom variables page-scope*}]
 
     [{* Ecommerce tracking *}]
     [{if $oView->getClassName() == "alist"}]
@@ -62,46 +62,46 @@
     [{* newsletter goals *}]
     [{if $oView->getClassName() == "account_newsletter" }][{* Viewed account newsletter settings page *}]
         [{if $oView->getSubscriptionStatus() == 0}]
-            _paq.push(['setCustomVariable', [{$piwik_CustomIndexNewsletter}], "[{ $oViewConf->getPiwikText('Newsletter') }]", "[{ $oViewConf->getPiwikText('NewsletterAcc') }]", "page"]);
+            _paq.push(['setCustomVariable', [{$matomo_CustomIndexNewsletter}], "[{ $oViewConf->getMatomoText('Newsletter') }]", "[{ $oViewConf->getMatomoText('NewsletterAcc') }]", "page"]);
         [{elseif $oView->getSubscriptionStatus() == 1}]
             [{* enabled newsletter in account settings *}]
-            _paq.push(['setCustomVariable', [{$piwik_CustomIndexNewsletter}], "[{ $oViewConf->getPiwikText('Newsletter') }]", "[{ $oViewConf->getPiwikText('NewsletterAccOn') }]", "page"]);
+            _paq.push(['setCustomVariable', [{$matomo_CustomIndexNewsletter}], "[{ $oViewConf->getMatomoText('Newsletter') }]", "[{ $oViewConf->getMatomoText('NewsletterAccOn') }]", "page"]);
         [{elseif $oView->getSubscriptionStatus() == -1}]
             [{* disabled newsletter in account settings *}]
-            _paq.push(['setCustomVariable', [{$piwik_CustomIndexNewsletter}], "[{ $oViewConf->getPiwikText('Newsletter') }]", "[{ $oViewConf->getPiwikText('NewsletterAccOff') }]", "page"]);
+            _paq.push(['setCustomVariable', [{$matomo_CustomIndexNewsletter}], "[{ $oViewConf->getMatomoText('Newsletter') }]", "[{ $oViewConf->getMatomoText('NewsletterAccOff') }]", "page"]);
         [{/if}]
     [{elseif $oView->getClassName() == "newsletter"}][{* Newsletter subscription page *}]
 
         [{* enable goal tracking if configured *}]
-        [{if $oView->getNewsletterStatus() == 2 && $oViewConf->getPiwikNlgoalid() > 0}]
-            _paq.push(['trackGoal', [{$piwik_NewletterGoal}]]);
+        [{if $oView->getNewsletterStatus() == 2 && $oViewConf->getMatomoNlgoalid() > 0}]
+            _paq.push(['trackGoal', [{$matomo_NewletterGoal}]]);
         [{/if}]
 
         [{* Custom Variable: Detailed newsletter registration tracking if configured *}]
-        [{if $piwik_CustomIndexNewsletter > 0}]
+        [{if $matomo_CustomIndexNewsletter > 0}]
 
             [{* Customer visited newsletter registration form *}]
             [{if $oView->getNewsletterStatus() == 4 || !$oView->getNewsletterStatus()}]
-                _paq.push(['setCustomVariable', [{$piwik_CustomIndexNewsletter}], "[{ $oViewConf->getPiwikText('Newsletter') }]", "[{ $oViewConf->getPiwikText('Newsletter4') }]", "page"]);
+                _paq.push(['setCustomVariable', [{$matomo_CustomIndexNewsletter}], "[{ $oViewConf->getMatomoText('Newsletter') }]", "[{ $oViewConf->getMatomoText('Newsletter4') }]", "page"]);
 
                 [{* Customer submits newsletter registration form *}]
             [{elseif $oView->getNewsletterStatus() == 1}]
-                _paq.push(['setCustomVariable', [{$piwik_CustomIndexNewsletter}], "[{ $oViewConf->getPiwikText('Newsletter') }]", "[{ $oViewConf->getPiwikText('Newsletter1') }]", "page"]);
+                _paq.push(['setCustomVariable', [{$matomo_CustomIndexNewsletter}], "[{ $oViewConf->getMatomoText('Newsletter') }]", "[{ $oViewConf->getMatomoText('Newsletter1') }]", "page"]);
 
                 [{* Customer confirmed double-opt-in *}]
             [{elseif $oView->getNewsletterStatus() == 2}]
-                _paq.push(['setCustomVariable', [{$piwik_CustomIndexNewsletter}], "[{ $oViewConf->getPiwikText('Newsletter') }]", "[{ $oViewConf->getPiwikText('Newsletter2') }]", "page"]);
+                _paq.push(['setCustomVariable', [{$matomo_CustomIndexNewsletter}], "[{ $oViewConf->getMatomoText('Newsletter') }]", "[{ $oViewConf->getMatomoText('Newsletter2') }]", "page"]);
 
                 [{* Customer submits newsletter unsubscribe form *}]
             [{elseif $oView->getNewsletterStatus() == 3}]
-                _paq.push(['setCustomVariable', [{$piwik_CustomIndexNewsletter}], "[{ $oViewConf->getPiwikText('Newsletter') }]", "[{ $oViewConf->getPiwikText('Newsletter3') }]", "page"]);
+                _paq.push(['setCustomVariable', [{$matomo_CustomIndexNewsletter}], "[{ $oViewConf->getMatomoText('Newsletter') }]", "[{ $oViewConf->getMatomoText('Newsletter3') }]", "page"]);
             [{/if}]
         [{/if}]
 
         [{* Custom Variable: Payment method tracking if configured *}]
-    [{elseif $oView->getClassName() == "order" && $oViewConf->getPiwikCustomIndexPayment() > 0}]
+    [{elseif $oView->getClassName() == "order" && $oViewConf->getMatomoCustomIndexPayment() > 0}]
         [{assign var="payment" value=$oView->getPayment() }]
-        _paq.push(['setCustomVariable',[{$oViewConf->getPiwikCustomIndexPayment()}], '[{ $oViewConf->getPiwikText('Payment') }]', '[{ $payment->oxpayments__oxdesc->value }]', 'visit']);
+        _paq.push(['setCustomVariable',[{$oViewConf->getMatomoCustomIndexPayment()}], '[{ $oViewConf->getMatomoText('Payment') }]', '[{ $payment->oxpayments__oxdesc->value }]', 'visit']);
 
         [{* Ecommerce conversion thank you page *}]
     [{elseif $oView->getClassName() == "thankyou"}]
@@ -155,15 +155,15 @@
 
     _paq.push(['enableLinkTracking']);
 
-    [{* JavaScript Error Tracking, available since Piwik >= 2.2.0 *}]
-    [{if $oViewConf->getPiwikEnableJSError()}]
+    [{* JavaScript Error Tracking, available since Matomo >= 2.2.0 *}]
+    [{if $oViewConf->getMatomoEnableJSError()}]
         _paq.push(['enableJSErrorTracking']);
     [{/if}]
 
     (function () {
-    var u = document.location.protocol + "//[{$oViewConf->getPiwikUrl()|replace:'http://':''|replace:'https://':''}]/";
+    var u = document.location.protocol + "//[{$oViewConf->getMatomoUrl()|replace:'http://':''|replace:'https://':''}]/";
     _paq.push(['setTrackerUrl', u + 'piwik.php']);
-    _paq.push(['setSiteId', [{$oViewConf->getPiwikPageid()}]]);
+    _paq.push(['setSiteId', [{$oViewConf->getMatomoPageid()}]]);
     var d = document, g = d.createElement('script'), s = d.getElementsByTagName('script')[0];
     g.type = 'text/javascript';
     g.defer = true;
@@ -172,10 +172,10 @@
     s.parentNode.insertBefore(g, s);
     })();
 [{/capture}]
-[{if $piwikdebug}]
-    <pre>class: [{$oView->getClassName()}]<br/>[{$smarty.capture.piwikscript|replace:';':';<br/>'}]</pre>
-    <script type="text/javascript">[{$smarty.capture.piwikscript}]</script>
+[{if $matomodebug}]
+    <pre>class: [{$oView->getClassName()}]<br/>[{$smarty.capture.matomoscript|replace:';':';<br/>'}]</pre>
+    <script type="text/javascript">[{$smarty.capture.matomoscript}]</script>
 [{else}]
-    <script type="text/javascript">[{$smarty.capture.piwikscript|strip}]</script>
+    <script type="text/javascript">[{$smarty.capture.matomoscript|strip}]</script>
 [{/if}]
-<!-- End Piwik Code -->
+<!-- End Matomo Code -->

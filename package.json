@@ -1,20 +1,21 @@
 {
-  "name": "bla-piwik",
+  "name": "matomo",
   "version": "2.3.0",
-  "description": "Piwik Analytics for OXID eShop",
+  "description": "Matomo (Piwik) Analytics for OXID eShop",
   "author": "",
   "company": "bestlife AG",
   "email": "oxid@bestlife.ag",
-  "url" : "https://marat.ws/piwik-analytics-fuer-oxid-eshop/",
+  "url": "https://github.com/vanilla-thunder/oxid-module-bla-matomo",
   "license": "GPL-3.0",
   "repository": {
     "type": "git",
-    "url": "git://github.com/vanilla-thunder/bla-piwik.git"
+    "url": "git://github.com/vanilla-thunder/oxid-module-bla-matomo.git"
   },
   "bugs": {
-    "url": "https://github.com/vanilla-thunder/bla-piwik/issues"
+    "url": "https://github.com/vanilla-thunder/oxid-module-bla-matomo/issues"
   },
   "keywords": [
+    "matomo",
     "piwik",
     "oxid"
   ],

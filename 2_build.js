@@ -16,7 +16,6 @@ var shell = function (command) {
 
 // cleanup
 shell("rm -rf _module/application");
-shell("rm -rf _module/extend");
 shell("rm -rf _master/copy_this/modules/bla/"+p.name);
 console.log("");
 console.log("     cleanup finished");
@@ -24,9 +23,7 @@ console.log("     cleanup finished");
 
 // copy files
 shell("cp -r application _module/");
-shell("cp -r extend _module/");
 shell("cp metadata.php _module/metadata.php");
-shell("cp changelog _module/changelog");
 shell("cp license _module/license");
 shell("cp README.md _module/README.md");
 console.log("     new files copied");

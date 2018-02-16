@@ -24,67 +24,81 @@
  * @link        http://www.bestlife.ag
  *
  * @license     GPLv3
+ *
+ * changelog:
+ * 
+ * --- 2018-02-16 :: version 2.3
+ * + piwik in matomo umbenannt
+ * + kurzes timeout für standorterkennung, damit es keine Probleme gibt, wenn matomo server unerreichbar ist.
+ * 
+ * --- 2016-10-23 :: version 2.2.3
+ * + Standorterkennung über IP
+ *
+ * --- 2016-09-07 :: version 2.2.2
+ * + fehlendes pushPageView ergänzt
+ * + newsletter goal: fehlende ] hinzugefügt
+ * 
  */
 $sMetadataVersion = '1.1';
 
 $oLang = oxRegistry::getLang();
 
 $aModule = [
-    'id'          => 'bla-piwik',
-    'title'       => '<strong style="color:#95b900;font-size:125%;">best</strong><strong style="color:#c4ca77;font-size:125%;">life</strong> <strong>Piwik Analytics</strong>',
+    'id'          => 'matomo',
+    'title'       => '<strong style="color:#95b900;font-size:125%;">best</strong><strong style="color:#c4ca77;font-size:125%;">life</strong> <strong>Matomo Analytics (ehemals Piwik)</strong>',
     'description' => [
-        'en' => 'Add Piwik tracking code to track activities in your online shop. You need access to a <a href="http://www.piwik.org" target="_blank">Piwik</a> installation to use this module.<br><br><b>UPDATE INFORMATION</b><br>When you update from an earlier release (<2.0) make sure to update the module\'s settings. It is a breaking change and configuration needs to be updated!<br><b>UPDATE INFORMATION for v1.1</b><br>This release uses piwik\'s internal <i>site search</i> which is available since Piwik 1.9. This means that the former search tracking with custom variable will not be available anymore!',
-        'de' => 'Fügt einen Piwik Tracking Code hinzu, um eine Webanalyse ihres Shops zu erhalten. Sie benötigen Zugriff auf eine <a href="http://www.piwik.org" target="_blank">Piwik</a> Installation, um dies verwenden zu können.<br><br><b>UPDATE HINWEIS</b><br>Sollten sie von einer früheren Version dieses Moduls updaten (<2.0), passen sie bitte die Modulein&shy;stellungen an!<br><b>UPDATE HINWEIS für v1.1</b><br>Es wird die seit Piwik 1.9 enthaltene <i>Interne Suche</i> verwendet und daher ist das Tracking über die Benutzer&shy;definierten Variablen nicht mehr verfügbar!'
+        'en' => 'Add Matomo (formerly Piwik) tracking codes to your online shop.<br/>You need a <a href="http://www.matomo.org" target="_blank">matomo</a> installation to use this module.',
+        'de' => 'Fügt Matomo (ehemals Piwik) Tracking Codes in Ihren online Shops ein.<br/>Sie benötigen eine <a href="http://www.matomo.org" target="_blank">matomo</a> Installation, um dieses Modul zu nutzen.'
     ],
-    'thumbnail'   => 'bestlife.png',
+    'thumbnail'   => '../bestlife.png',
     'version'     => '___VERSION___',
     'author'      => '___AUTHOR___ ___COMPANY___',
     'email'       => '___EMAIL___',
     'url'         => '___URL___',
     'extend'      => [
-        'oxviewconfig' => 'bla/bla-piwik/extend/oxviewconfig_piwik'
+        'oxviewconfig' => 'bla/matomo/application/extend/oxviewconfig_matomo'
     ],
     'blocks'      => [
-        ['template' => 'layout/base.tpl', 'block' => 'base_style', 'file' => '/application/views/blocks/piwik.tpl'],
-        ['template' => 'layout/base.tpl', 'block' => 'base_js', 'file' => '/application/views/blocks/piwik-content-tracking.tpl']
+        ['template' => 'layout/base.tpl', 'block' => 'base_style', 'file' => '/application/views/blocks/matomo.tpl'],
+        ['template' => 'layout/base.tpl', 'block' => 'base_js', 'file' => '/application/views/blocks/matomo-content-tracking.tpl']
     ],
     'settings'    => [
-        ['group' => 'blaPiwik_Main', 'name' => 'blaPiwik_debug', 'type' => 'bool', 'value' => true],
-        ['group' => 'blaPiwik_Main', 'name' => 'blaPiwik_sUrl', 'type' => 'str', 'value' => ''],
-        ['group' => 'blaPiwik_Main', 'name' => 'blaPiwik_sToken', 'type' => 'str', 'value' => ''],
-        ['group' => 'blaPiwik_Main', 'name' => 'blaPiwik_iPageid', 'type' => 'str', 'value' => ''],
-        ['group' => 'blaPiwik_Main', 'name' => 'blaPiwik_iNewsgoalid', 'type' => 'str', 'value' => '0'],
-        ['group' => 'blaPiwik_Main', 'name' => 'blaPiwik_iMaxCustVar', 'type' => 'str', 'value' => '5'],
-        ['group' => 'blaPiwik_Main', 'name' => 'blaPiwik_iCustindexNewsletter', 'type' => 'str', 'value' => '0'],
-        ['group' => 'blaPiwik_Main', 'name' => 'blaPiwik_iCustindexPayment', 'type' => 'str', 'value' => '0'],
-        ['group' => 'blaPiwik_Main', 'name' => 'blaPiwik_blUseUserID', 'type' => 'bool', 'value' => false],
-        ['group' => 'blaPiwik_Main', 'name' => 'blaPiwik_blFirstReferrerConv', 'type' => 'bool', 'value' => false],
-        ['group' => 'blaPiwik_Main', 'name' => 'blaPiwik_blEnableJSErrorTrackin', 'type' => 'bool', 'value' => false],
-        ['group' => 'blaPiwik_CustomVars', 'name' => 'blaPiwik_sCustomvarNewsletter', 'type' => 'str', 'value' => $oLang->translateString('SHOP_MODULE_blaPiwik_CUSTOM_NEWSLETTER')],
-        ['group' => 'blaPiwik_CustomVars', 'name' => 'blaPiwik_sCustomvarPayment', 'type' => 'str', 'value' => $oLang->translateString('SHOP_MODULE_blaPiwik_CUSTOM_PAYMENT')],
-        ['group' => 'blaPiwik_CustomVars', 'name' => 'blaPiwik_sNewsletterAccount', 'type' => 'str', 'value' => $oLang->translateString('SHOP_MODULE_blaPiwik_NEWSLETTER_ACCOUNT')],
-        ['group' => 'blaPiwik_CustomVars', 'name' => 'blaPiwik_sNewsletterAccountOn', 'type' => 'str', 'value' => $oLang->translateString('SHOP_MODULE_blaPiwik_NEWSLETTER_ACCOUNT_ON')],
-        ['group' => 'blaPiwik_CustomVars', 'name' => 'blaPiwik_sNewsletterAccountOff', 'type' => 'str', 'value' => $oLang->translateString('SHOP_MODULE_blaPiwik_NEWSLETTER_ACCOUNT_OFF')],
-        ['group' => 'blaPiwik_CustomVars', 'name' => 'blaPiwik_sNewsletterViewed', 'type' => 'str', 'value' => $oLang->translateString('SHOP_MODULE_blaPiwik_NEWSLETTER_VIEWED')],
-        ['group' => 'blaPiwik_CustomVars', 'name' => 'blaPiwik_sNewsletterOrdered', 'type' => 'str', 'value' => $oLang->translateString('SHOP_MODULE_blaPiwik_NEWSLETTER_ORDERED')],
-        ['group' => 'blaPiwik_CustomVars', 'name' => 'blaPiwik_sNewsletterActivated', 'type' => 'str', 'value' => $oLang->translateString('SHOP_MODULE_blaPiwik_NEWSLETTER_ACTIVATED')],
-        ['group' => 'blaPiwik_CustomVars', 'name' => 'blaPiwik_sNewsletterCanceled', 'type' => 'str', 'value' => $oLang->translateString('SHOP_MODULE_blaPiwik_NEWSLETTER_CANCELED')],
-        ['group' => 'blaPiwik_Params', 'name' => 'blaPiwik_aParamMapVisit', 'type' => 'aarr', 'value' => null],
-        ['group' => 'blaPiwik_Params', 'name' => 'blaPiwik_aParamMapPage', 'type' => 'aarr', 'value' => null],
+        ['group' => 'blaMatomo_Main', 'name' => 'blaMatomo_debug', 'type' => 'bool', 'value' => true],
+        ['group' => 'blaMatomo_Main', 'name' => 'blaMatomo_sUrl', 'type' => 'str', 'value' => ''],
+        ['group' => 'blaMatomo_Main', 'name' => 'blaMatomo_sToken', 'type' => 'str', 'value' => ''],
+        ['group' => 'blaMatomo_Main', 'name' => 'blaMatomo_iPageid', 'type' => 'str', 'value' => ''],
+        ['group' => 'blaMatomo_Main', 'name' => 'blaMatomo_iNewsgoalid', 'type' => 'str', 'value' => '0'],
+        ['group' => 'blaMatomo_Main', 'name' => 'blaMatomo_iMaxCustVar', 'type' => 'str', 'value' => '5'],
+        ['group' => 'blaMatomo_Main', 'name' => 'blaMatomo_iCustindexNewsletter', 'type' => 'str', 'value' => '0'],
+        ['group' => 'blaMatomo_Main', 'name' => 'blaMatomo_iCustindexPayment', 'type' => 'str', 'value' => '0'],
+        ['group' => 'blaMatomo_Main', 'name' => 'blaMatomo_blUseUserID', 'type' => 'bool', 'value' => false],
+        ['group' => 'blaMatomo_Main', 'name' => 'blaMatomo_blFirstReferrerConv', 'type' => 'bool', 'value' => false],
+        ['group' => 'blaMatomo_Main', 'name' => 'blaMatomo_blEnableJSErrorTrackin', 'type' => 'bool', 'value' => false],
+        ['group' => 'blaMatomo_CustomVars', 'name' => 'blaMatomo_sCustomvarNewsletter', 'type' => 'str', 'value' => $oLang->translateString('SHOP_MODULE_blaMatomo_CUSTOM_NEWSLETTER')],
+        ['group' => 'blaMatomo_CustomVars', 'name' => 'blaMatomo_sCustomvarPayment', 'type' => 'str', 'value' => $oLang->translateString('SHOP_MODULE_blaMatomo_CUSTOM_PAYMENT')],
+        ['group' => 'blaMatomo_CustomVars', 'name' => 'blaMatomo_sNewsletterAccount', 'type' => 'str', 'value' => $oLang->translateString('SHOP_MODULE_blaMatomo_NEWSLETTER_ACCOUNT')],
+        ['group' => 'blaMatomo_CustomVars', 'name' => 'blaMatomo_sNewsletterAccountOn', 'type' => 'str', 'value' => $oLang->translateString('SHOP_MODULE_blaMatomo_NEWSLETTER_ACCOUNT_ON')],
+        ['group' => 'blaMatomo_CustomVars', 'name' => 'blaMatomo_sNewsletterAccountOff', 'type' => 'str', 'value' => $oLang->translateString('SHOP_MODULE_blaMatomo_NEWSLETTER_ACCOUNT_OFF')],
+        ['group' => 'blaMatomo_CustomVars', 'name' => 'blaMatomo_sNewsletterViewed', 'type' => 'str', 'value' => $oLang->translateString('SHOP_MODULE_blaMatomo_NEWSLETTER_VIEWED')],
+        ['group' => 'blaMatomo_CustomVars', 'name' => 'blaMatomo_sNewsletterOrdered', 'type' => 'str', 'value' => $oLang->translateString('SHOP_MODULE_blaMatomo_NEWSLETTER_ORDERED')],
+        ['group' => 'blaMatomo_CustomVars', 'name' => 'blaMatomo_sNewsletterActivated', 'type' => 'str', 'value' => $oLang->translateString('SHOP_MODULE_blaMatomo_NEWSLETTER_ACTIVATED')],
+        ['group' => 'blaMatomo_CustomVars', 'name' => 'blaMatomo_sNewsletterCanceled', 'type' => 'str', 'value' => $oLang->translateString('SHOP_MODULE_blaMatomo_NEWSLETTER_CANCELED')],
+        ['group' => 'blaMatomo_Params', 'name' => 'blaMatomo_aParamMapVisit', 'type' => 'aarr', 'value' => null],
+        ['group' => 'blaMatomo_Params', 'name' => 'blaMatomo_aParamMapPage', 'type' => 'aarr', 'value' => null],
 
-        ['group' => 'blaPiwik_contentTracking', 'name' => 'blaPiwik_ct_enable', 'type' => 'bool', 'value' => false],
+        ['group' => 'blaMatomo_contentTracking', 'name' => 'blaMatomo_ct_enable', 'type' => 'bool', 'value' => false],
 
-        ['group' => 'blaPiwik_contentTracking', 'name' => 'blaPiwik_ct_flexprev', 'type' => 'str', 'value' => '.flex-prev'],
-        ['group' => 'blaPiwik_contentTracking', 'name' => 'blaPiwik_ct_flexnext', 'type' => 'str', 'value' => '.flex-next'],
+        ['group' => 'blaMatomo_contentTracking', 'name' => 'blaMatomo_ct_flexprev', 'type' => 'str', 'value' => '.flex-prev'],
+        ['group' => 'blaMatomo_contentTracking', 'name' => 'blaMatomo_ct_flexnext', 'type' => 'str', 'value' => '.flex-next'],
 
-        ['group' => 'blaPiwik_contentTracking', 'name' => 'blaPiwik_ct_zoom1', 'type' => 'str', 'value' => '#zoom1'],
-        ['group' => 'blaPiwik_contentTracking', 'name' => 'blaPiwik_ct_pic1', 'type' => 'str', 'value' => '#morePics_1'],
-        ['group' => 'blaPiwik_contentTracking', 'name' => 'blaPiwik_ct_pic2', 'type' => 'str', 'value' => '#morePics_2'],
-        ['group' => 'blaPiwik_contentTracking', 'name' => 'blaPiwik_ct_pic3', 'type' => 'str', 'value' => '#morePics_3'],
-        ['group' => 'blaPiwik_contentTracking', 'name' => 'blaPiwik_ct_pic4', 'type' => 'str', 'value' => '#morePics_4'],
-        ['group' => 'blaPiwik_contentTracking', 'name' => 'blaPiwik_ct_description', 'type' => 'str', 'value' => 'a[href="#description"]'],
-        ['group' => 'blaPiwik_contentTracking', 'name' => 'blaPiwik_ct_pricealarm', 'type' => 'str', 'value' => 'a[href="#pricealarm"]'],
-        ['group' => 'blaPiwik_contentTracking', 'name' => 'blaPiwik_ct_tags', 'type' => 'str', 'value' => 'a[href="#tags"]'],
-        ['group' => 'blaPiwik_contentTracking', 'name' => 'blaPiwik_ct_productFbComments', 'type' => 'str', 'value' => 'a[href="#productFbComments"]'],
+        ['group' => 'blaMatomo_contentTracking', 'name' => 'blaMatomo_ct_zoom1', 'type' => 'str', 'value' => '#zoom1'],
+        ['group' => 'blaMatomo_contentTracking', 'name' => 'blaMatomo_ct_pic1', 'type' => 'str', 'value' => '#morePics_1'],
+        ['group' => 'blaMatomo_contentTracking', 'name' => 'blaMatomo_ct_pic2', 'type' => 'str', 'value' => '#morePics_2'],
+        ['group' => 'blaMatomo_contentTracking', 'name' => 'blaMatomo_ct_pic3', 'type' => 'str', 'value' => '#morePics_3'],
+        ['group' => 'blaMatomo_contentTracking', 'name' => 'blaMatomo_ct_pic4', 'type' => 'str', 'value' => '#morePics_4'],
+        ['group' => 'blaMatomo_contentTracking', 'name' => 'blaMatomo_ct_description', 'type' => 'str', 'value' => 'a[href="#description"]'],
+        ['group' => 'blaMatomo_contentTracking', 'name' => 'blaMatomo_ct_pricealarm', 'type' => 'str', 'value' => 'a[href="#pricealarm"]'],
+        ['group' => 'blaMatomo_contentTracking', 'name' => 'blaMatomo_ct_tags', 'type' => 'str', 'value' => 'a[href="#tags"]'],
+        ['group' => 'blaMatomo_contentTracking', 'name' => 'blaMatomo_ct_productFbComments', 'type' => 'str', 'value' => 'a[href="#productFbComments"]'],
     ]
 ];
