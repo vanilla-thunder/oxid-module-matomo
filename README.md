@@ -1,11 +1,11 @@
-## Piwik Analytics for OXID eShop
+## Matomo (Piwik) Analytics for OXID eShop
 by  bestlife AG <oxid@bestlife.ag>  
-module version 2.3.0 2017-2-28  
-https://marat.ws/piwik-analytics-fuer-oxid-eshop/
+module version 2.3.0 2018-2-16  
+https://github.com/vanilla-thunder/oxid-module-bla-matomo
 
 ### LICENSE AGREEMENT
-   Piwik Analytics for OXID eShop  
-   Copyright (C) 2017 bestlife AG  
+   Matomo (Piwik) Analytics for OXID eShop  
+   Copyright (C) 2018 bestlife AG  
    info:  oxid@bestlife.ag  
   
    This program is free software;  
