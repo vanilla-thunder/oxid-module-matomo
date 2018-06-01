@@ -33,7 +33,7 @@ $sLangName = "Deutsch";
 $css = '<style type="text/css">
 .groupExp dd > h3 { display: inline-block; margin: 0 15px; border: none; }
 .groupExp a.rc b {font-size:medium;color:#ff3600;}.groupExp dt input.txt {width:430px !important} .groupExp dl {display:block !important;} input.confinput {position:fixed;top:20px;right:70px;background:#008B2D;padding:10px 25px;color:white;border:1px solid black;cursor:pointer;font-size:125%;} input.confinput:hover {outline:3px solid #ff3600;} .groupExp dt textarea.txtfield {width:430px;height:150px;}</style>';
-$aLang = [
+$aLang = array(
     'charset'                                     => 'UTF-8',
     'SHOP_MODULE_GROUP_blaMatomo_Main'             => $css . 'Matomo Konfiguration',
     'SHOP_MODULE_blaMatomo_debug'                  => 'Debug Modus (zeigt für Shop-Admins Matomo Tracking Variablen im Template an)',
@@ -71,4 +71,4 @@ $aLang = [
     'SHOP_MODULE_GROUP_blaMatomo_Params'           => 'Zusätzliches Parametermapping',
     'SHOP_MODULE_blaMatomo_aParamMapVisit'         => '<h3>Parameter Mapping für visit-scope benutzerdefinierte Variablen</h3><em>Hierüber können pro Zeile ein URL Parameter in Matomos visit-scope <a href="http://matomo.org/docs/custom-variables/" target="_blank" title="Was ist eine benutzerdefinierte Variable">benutzerdefinierten Variablen</a> gespeichert werden. (leer lassen wenn nicht benötigt)<p><b>Konfiguration:</b> parameter => index|Bezeichnung<br><code>foo => 4|Parameter 1<br>foo2 => 5|Parameter2</code><br>Bei einem Aufruf von "http://www.shop.tld/index.php?foo=bar" wird in Matomo in die benutzerdefinierte Variable mit dem Index 4 und dem Namen "Parameter 1" der Wert "bar" gespeichert.<br><b>Achtung</b> ein visit-scope Index wird auch schon für das Zahlungsart-Tracking verwendet!</p></em>',
     'SHOP_MODULE_blaMatomo_aParamMapPage'          => '<h3>Parameter Mapping für page-scope benutzerdefinierte Variablen</h3><em>Hierüber können pro Zeile ein URL Parameter in Matomos page-scope <a href="http://matomo.org/docs/custom-variables/" target="_blank" title="Was ist eine benutzerdefinierte Variable">benutzerdefinierten Variablen</a> gespeichert werden. (leer lassen wenn nicht benötigt)<br> Funktionsweise wie beim visit-scope Parameter-Mapping.<br><b>Achtung</b> ein page-scope Index wird auch schon für das Newsletter-Tracking verwendet!</em>'
-];
+);

@@ -31,7 +31,7 @@ $sLangName = "English";
 // RESOURCE IDENTITFIER = STRING
 // -------------------------------
 $css = '<style type="text/css">.groupExp a.rc b {font-size:medium;color:#ff3600;}.groupExp dt input.txt {width:430px !important} .groupExp dl {display:block !important;} input.confinput {position:fixed;top:20px;right:70px;background:#008B2D;padding:10px 25px;color:white;border:1px solid black;cursor:pointer;font-size:125%;} input.confinput:hover {outline:3px solid #ff3600;} .groupExp dt textarea.txtfield {width:430px;height:150px;}</style>';
-$aLang = [
+$aLang = array(
     'charset'                                     => 'UTF-8',
     'SHOP_MODULE_GROUP_blaMatomo_Main'             => $css . 'Matomo Configuration',
     'SHOP_MODULE_blaMatomo_debug'                  => 'Debug Mode (display Matomo Tracking variables in template for shop admins)',
@@ -68,4 +68,4 @@ $aLang = [
     'SHOP_MODULE_GROUP_blaMatomo_Params'           => 'Additional parameter mapping',
     'SHOP_MODULE_blaMatomo_aParamMapVisit'         => '<h3>Parameter mapping for visit-scope custom variables</h3><em>You can define addition URL parameters that will get stored in Matomo\'s visit-scope <a href="http://matomo.org/docs/custom-variables/" target="_blank" title="What is a custom variable">custom variable</a>. (let it empty if you do not need this feature)<p><b>Configuration:</b> parameter => index|Label<br><code>foo => 4|Parameter 1<br>foo2 => 5|Parameter2</code><br>On a request like "http://www.shop.tld/index.php?foo=bar" Matomo will store in the custom variable with the the index 4 and the label "Parameter 1" the value "bar".<br><b>Caution</b> one visit-scope index is already used for payment method tracking!</p></em>',
     'SHOP_MODULE_blaMatomo_aParamMapPage'          => '<h3>Parameter mapping for page-scope custom variables</h3><em>You can define additional URL parameters that will get stored in Matomo\'s page-scope <a href="http://matomo.org/docs/custom-variables/" target="_blank" title="What is a custom variable">custom variable</a>. (let it empty if you do not need this feature)<br> See visit-scope parameter mapping for instructions.<br><b>Caution</b> one page-scope index is already used for the newsletter registration tracking!</em>'
-];
+);
