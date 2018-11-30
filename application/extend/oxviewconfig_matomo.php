@@ -1,22 +1,16 @@
 <?php
-
 /**
- * ___MODULE___
+ * [___VENDOR___] ___NAME___
  * Copyright (C) ___YEAR___  ___COMPANY___
  * info:  ___EMAIL___
  *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
+ * This program is free software;
+ * you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation;
+ * either version 3 of the License, or (at your option) any later version.
  *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ * This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+ * without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
+ * You should have received a copy of the GNU General Public License along with this program; if not, see <http://www.gnu.org/licenses/>
  *
  * @author      bestlife AG <oxid@bestlife.ag>
  * @author      Klaus Weidenbach
@@ -26,54 +20,50 @@
  *
  * @license     GPLv3
  */
+
 class oxviewconfig_matomo extends oxviewconfig_matomo_parent
 {
-    public function matomodebug()
-    {
-        return ( oxRegistry::getConfig()->getConfigParam("blaMatomo_debug") && oxRegistry::getConfig()->getUser()->oxuser__oxrights->value == "malladmin" ) ? true : false ;
-    }
+	public function getMatomoJSTracking() {
+		return oxRegistry::get("matomo")->getMatomoJSTracking($this);
+	}
 
-    /**
-     * Returns Matomo server URL.
-     *
-     * @return string
-     */
-    protected $_matomoUrl = null;
+	// pure php tracking
+	public function matomoTrackPageView() {
+		oxRegistry::get("matomo")->apiTracking("PageView");
+	}
+	public function matomoTrackGoal($goal) {}
+	public function matomoTrackSearch() {
+		oxRegistry::get("matomo")->apiTracking("Search",oxRegistry::getConfig()->getActiveView());
+	}
 
-    public function getMatomoUrl()
-    {
-        if ($this->_matomoUrl === null) $this->_matomoUrl = oxRegistry::getConfig()->getConfigParam('blaMatomo_sUrl');
+	/**
+	 * returns visitior's ISO2 country code based on IP and GeoLocation stuff
+	 *
+	 * @return string
+	 */
+	protected $_originCountry = null;
+	public function getCountryByIP()
+	{
+		$oUtilsServer = oxRegistry::get("oxUtilsServer");
+		if( $_originCountry = $oUtilsServer->getOxCookie("_originCountry") ) $this->_originCountry = $_originCountry;
+		else if($result = oxRegistry::get("matomo")->getCountryByIP())
+		{
+			$UserCountry = (object) array_shift(unserialize($result));
+			$oUtilsServer->setOxCookie("_originCountry",$UserCountry->country_code,time()+60*60*24*30);
+			$this->_originCountry = $UserCountry->country_code;
+		}
+		else
+		{
+			$oUtilsServer->setOxCookie("_originCountry",false,time()+600);// in 10 min nochmal versuchen
+			$this->_originCountry = false;
+		}
 
-        return $this->_matomoUrl;
-    }
+		//var_dump($this->_originCountry);
+		return $this->_originCountry;
+	}
 
-    /**
-     * Returns Matomo Auth Token.
-     *
-     * @return string
-     */
-    protected $_matomoToken = null;
 
-    private function _getMatomoToken()
-    {
-        if ($this->_matomoToken === null) $this->_matomoToken = oxRegistry::getConfig()->getConfigParam('blaMatomo_sToken');
-
-        return $this->_matomoToken;
-    }
-
-    /**
-     * Returns Matomo page ID for tracking.
-     *
-     * @return int
-     */
-    protected $_matomoPageId = null;
-
-    public function getMatomoPageid()
-    {
-        if ($this->_matomoPageId === null) $this->_matomoPageId = intval(oxRegistry::getConfig()->getConfigParam('blaMatomo_iPageid'));
-
-        return $this->_matomoPageId;
-    }
+	// ----------------------------------------------------------------------------- ab hier wird aktuell nix mehr benutzt
 
     /**
      * Returns Matomo's max number of allowed custom variables.
@@ -131,21 +121,6 @@ class oxviewconfig_matomo extends oxviewconfig_matomo_parent
     }
 
     /**
-     * If set to true accurately track your customers between devices and browsers.
-     * This feature requires Matomo >= 2.7.0.
-     *
-     * @see setUserId( string )
-     * @since blaMatomo 2.2.0
-     * @return boolean
-     */
-    protected $_matomoUseUserID = null;
-    public function getEnableUserID()
-    {
-        if ($this->_matomoUseUserID === null) $this->_matomoUseUserID = oxRegistry::getConfig()->getConfigParam('blaMatomo_blUseUserID');
-        return $this->_matomoUseUserID;
-    }
-
-    /**
      * If set to true attribute a conversion to the first referrer. By default, conversion
      * is attributed to the most recent referrer.
      * This feature requires Matomo >= 1.2.0.
@@ -177,59 +152,6 @@ class oxviewconfig_matomo extends oxviewconfig_matomo_parent
         return $this->_matomoEnableJSError;
     }
 
-    public function getDocumentTitle(oxView $oView)
-    {
-        $sTitle = "";
-        $oLang = oxRegistry::getLang();
-        switch ($oView->getClassName())
-        {
-            case "start":
-                $sTitle = $oLang->translateString("HOME");
-                break;
-
-            case "oxUBase":
-                $sTitle = "404/URL = " . urlencode($oView->getViewDataElement("sUrl")) . "/From = " . urlencode($_SERVER['HTTP_REFERER']);
-                break;
-
-            case "alist":
-            case "manufacturerlist":
-                foreach($oView->getBreadCrumb() as $crumb) $sTitle .= "/{$crumb['title']}";
-                break;
-            case "tag":
-                $sTitle = $oLang->translateString("TAGS")."/".$oView->getTitle();
-                break;
-
-            case "contact":
-                $sTitle = $oLang->translateString("CONTACT");
-                break;
-
-            case "basket":
-                $sTitle = $oLang->translateString("ORDER")."/".$oLang->translateString("STEPS_BASKET");
-                break;
-
-            case "user":
-                $sTitle = $oLang->translateString("ORDER")."/".$oLang->translateString("STEPS_SEND");
-                break;
-
-            case "payment":
-                $sTitle = $oLang->translateString("ORDER")."/".$oLang->translateString("STEPS_PAY");
-                break;
-
-            case "order":
-                $sTitle = $oLang->translateString("ORDER")."/".$oLang->translateString("STEPS_ORDER");
-                break;
-
-            case "thankyou":
-                $sTitle = $oLang->translateString("ORDER")."/5. ".$oLang->translateString("ORDER_COMPLETED");
-                break;
-
-            default:
-                $sTitle = $oView->getTitle();
-                break;
-        }
-
-        return $sTitle;
-    }
 
     /**
      * Returns text that will get displayed in Matomo for custom variables.
@@ -350,52 +272,11 @@ class oxviewconfig_matomo extends oxviewconfig_matomo_parent
         return $this->_getMatomoParamMap('page');
     }
 
-    /**
-     * returns visitior's ISO2 country code based on IP and GeoLocation stuff
-     *
-     * @return string
-     */
-    protected $_originCountry = null;
-    public function getCountryByIP()
-    {
-        if ($this->_originCountry === null && $this->_getMatomoToken()) 
-        {
-            $oUtilsServer = oxRegistry::get("oxUtilsServer");
-            
-            if( $_originCountry = $oUtilsServer->getOxCookie("_originCountry") ) $this->_originCountry = $_originCountry;
-            else
-            {
-                $requestUrl = 'https://' . $this->getMatomoUrl() . '/?module=API&method=UserCountry.getLocationFromIP&ip=' . $_SERVER['REMOTE_ADDR']."&format=PHP&token_auth=" . $this->_getMatomoToken();
-                
-                $ch = curl_init();
-                curl_setopt($ch, CURLOPT_URL, $requestUrl);
-                curl_setopt($ch, CURLOPT_HEADER, false);
-                curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-                curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 1); 
-                curl_setopt($ch, CURLOPT_TIMEOUT, 1);
-                $result = curl_exec($ch);
-                curl_close($ch);
-                
-                if($result)
-                {
-                    $UserCountry = (object) array_shift(unserialize($result));
-                    $oUtilsServer->setOxCookie("_originCountry",$UserCountry->country_code,time()+60*60*24*30);
-                    $this->_originCountry = $UserCountry->country_code;
-                }
-                else 
-                {
-                    $oUtilsServer->setOxCookie("_originCountry","xxx",time()+600);// in 10 min nochmal versuchen
-                    $this->_originCountry = "xxx";
-                }
-            }
-        }
 
-        return $this->_originCountry;
-    }
 
     public function getAllMatomoCtSettings()
     {
-        return oxDb::getDb()->GetCol('SELECT SUBSTR(oxvarname,13) FROM oxconfig WHERE oxmodule = "module:bla-matomo" AND oxvarname LIKE "blaMatomo_ct_%"');
+        return oxDb::getDb()->GetCol('SELECT SUBSTR(oxvarname,13) FROM oxconfig WHERE oxmodule = "module:matomo" AND oxvarname LIKE "blaMatomo_ct_%"');
     }
     /**
      * returns settings for matomo content tracking

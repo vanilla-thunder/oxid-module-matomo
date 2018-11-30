@@ -1,18 +1,19 @@
 {
   "name": "matomo",
-  "version": "2.3.0",
+  "version": "2.4.0",
   "description": "Matomo (Piwik) Analytics for OXID eShop",
-  "author": "",
-  "company": "bestlife AG",
+  "author": "Klaus Weidenbach, Rafael Dabrowski, Marat Bedoev",
   "email": "oxid@bestlife.ag",
-  "url": "https://github.com/vanilla-thunder/oxid-module-bla-matomo",
+  "vendor": "bla",
+  "company": "bestlife AG",
+  "url": "https://github.com/vanilla-thunder/oxid-module-matomo",
   "license": "GPL-3.0",
   "repository": {
     "type": "git",
-    "url": "git://github.com/vanilla-thunder/oxid-module-bla-matomo.git"
+    "url": "https://github.com/vanilla-thunder/oxid-module-matomo.git"
   },
   "bugs": {
-    "url": "https://github.com/vanilla-thunder/oxid-module-bla-matomo/issues"
+    "url": "https://github.com/vanilla-thunder/oxid-module-matomo/issues"
   },
   "keywords": [
     "matomo",
@@ -21,6 +22,12 @@
   ],
   "dependencies": {
     "replace": "*",
-    "request": "*"
+    "fs-extra": "*"
+  },
+  "scripts": {
+    "init": "node scripts.js init",
+    "update": "node scripts.js update",
+    "build": "node scripts.js build",
+    "publish": "node scripts.js publish"
   }
 }
