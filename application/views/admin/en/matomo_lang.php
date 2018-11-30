@@ -1,6 +1,6 @@
 <?php
 /**
- * Matomo (Piwik) Analytics for OXID eShop
+ * [bla] matomo
  * Copyright (C) 2018  bestlife AG
  * info:  oxid@bestlife.ag
  *
