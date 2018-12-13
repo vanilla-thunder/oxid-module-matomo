@@ -21,28 +21,33 @@
  * @license     GPLv3
  *
  * changelog:
- * 
+ *
+ * --- 2018-12-12 :: version 2.5
+ * + updated to OXID eShop version 6.x
+ *
  * --- 2018-11-30 :: versiob 2.4
  * + kleines refactoring
  * + fehlende Lang Dateien hinzugefügt
  * + halbwegs brauchbare Dokumentation
  * + Image Tracker Generator
  * + Piwik PHP SDK
- * 
+ *
  * --- 2018-02-16 :: version 2.3
  * + piwik in matomo umbenannt
  * + kurzes timeout für standorterkennung, damit es keine Probleme gibt, wenn matomo server unerreichbar ist.
- * 
+ *
  * --- 2016-10-23 :: version 2.2.3
  * + Standorterkennung über IP
  *
  * --- 2016-09-07 :: version 2.2.2
  * + fehlendes pushPageView ergänzt
  * + newsletter goal: fehlende ] hinzugefügt
- * 
+ *
  */
-$sMetadataVersion = '1.1';
-$oLang = oxRegistry::getLang();
+$sMetadataVersion = '2.0';
+
+$oLang = \OxidEsales\Eshop\Core\Registry::getLang();
+
 $aModule = [
     'id'          => 'matomo',
     'title'       => '<strong style="color:#95b900;font-size:125%;">best</strong><strong style="color:#c4ca77;font-size:125%;">life</strong> <strong>Matomo Tracking (ehemals Piwik)</strong>',
@@ -51,21 +56,22 @@ $aModule = [
         'de' => 'Fügt Matomo (ehemals Piwik) Tracking Codes in Ihren online Shops ein.<br/>Sie benötigen eine <a href="http://www.matomo.org" target="_blank">matomo</a> Installation, um dieses Modul zu nutzen.'
     ],
     'thumbnail'   => '../bestlife.png',
-	'version'     => '2.4.0 ( 2018-11-30 )',
-	'author'      => 'Klaus Weidenbach, Rafael Dabrowski, Marat Bedoev, bestlife AG',
+    'version'     => '2.5.0 (2018-12-12)',
+    'author'      => 'Klaus Weidenbach, Rafael Dabrowski, Marat Bedoev, bestlife AG',
     'email'       => 'oxid@bestlife.ag',
     'url'         => 'https://github.com/vanilla-thunder/oxid-module-matomo',
     'extend'      => [
-        'oxviewconfig' => 'bla/matomo/application/extend/oxviewconfig_matomo',
-		'oxutilsview' => 'bla/matomo/application/extend/oxutilsview_matomo'
+        \OxidEsales\Eshop\Core\ViewConfig::class => Bla\Matomo\Core\ViewConfig::class,
+        \OxidEsales\Eshop\Core\UtilsView::class => Bla\Matomo\Core\UtilsView::class
     ],
-	'files' 	  => [
-		'matomo' => 'bla/matomo/application/files/matomo.php'
-	],
+    'controllers' => [
+        "matomo"  => Bla\Matomo\Files\Matomo::class
+    ],
     'blocks'      => [
-        ['template' => 'layout/base.tpl', 'block' => 'head_meta_robots', 'file' => '/application/views/blocks/head_meta_robots.tpl'],
-		['template' => 'layout/base.tpl', 'block' => 'base_js', 'file' => '/application/views/blocks/base_js.tpl'],
-		['template' => 'email/html/header.tpl', 'block' => 'email_html_header_tracking', 'file' => '/application/views/blocks/email_html_header_tracking.tpl']
+        ['template' => 'layout/base.tpl', 'block' => 'base_style', 'file' => '/views/blocks/matomo.tpl'],
+        ['template' => 'layout/base.tpl', 'block' => 'base_js', 'file' => '/views/blocks/base_js.tpl'],
+        ['template' => 'layout/base.tpl', 'block' => 'head_meta_robots', 'file' => '/views/blocks/head_meta_robots.tpl'],
+        ['template' => 'email/html/header.tpl', 'block' => 'email_html_header_tracking', 'file' => '/views/blocks/email_html_header_tracking.tpl'],
     ],
     'settings'    => [
         ['group' => 'blaMatomo_Main', 'name' => 'blaMatomo_sUrl', 'type' => 'str', 'value' => ''],
@@ -122,5 +128,4 @@ $aModule = [
         ['group' => 'blaMatomo_contentTracking', 'name' => 'blaMatomo_ct_productFbComments', 'type' => 'str', 'value' => 'a[href="#productFbComments"]'],
 */
     ]
-
 ];

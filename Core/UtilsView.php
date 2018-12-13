@@ -21,7 +21,12 @@
  * @license     GPLv3
  */
 
-class oxutilsview_matomo extends oxutilsview_matomo_parent
+namespace Bla\Matomo\Core;
+
+use Bla\Matomo\Files\Matomo;
+use OxidEsales\Eshop\Core\Registry;
+
+class UtilsView extends UtilsView_parent
 {
 
 	public function getSmarty ($blReload = false)
@@ -33,7 +38,6 @@ class oxutilsview_matomo extends oxutilsview_matomo_parent
 
 	public function smarty_function_matomo ( $params, &$smarty )
 	{
-		//return oxRegistry::get("matomo")->imageTracking($params);
-		return oxRegistry::get("matomo")->imageTracking($params);
+		return Registry::get(Matomo::class)->imageTracking($params);
 	}
 }

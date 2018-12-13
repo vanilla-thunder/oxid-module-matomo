@@ -25,6 +25,7 @@
  * @license     GPLv3
  *}]
 [{$smarty.block.parent}]
+
 [{if $oViewConf->getMatomoCtSetting("enable")}]
     [{assign var="matomodebug" value=$oViewConf->matomodebug()}]
 
@@ -33,9 +34,9 @@
         [{foreach from=$oViewConf->getAllMatomoCtSettings() item="_setting"}]
             /* [{$_setting}] */
             [{if $oViewConf->getMatomoCtSetting($_setting)}]
-                _paq.push(['trackContentImpression', '[{$_setting}]', '[{$_setting}]', 'http://www.example.com']);
+                _paq.push(['trackContentImpression', '[{$_setting}]', '[{$_setting}]', '[{$oViewConf->getHomeLink()}]']);
                 $('[{$oViewConf->getMatomoCtSetting($_setting)|replace:"'":'"'}]').on('click', function () {
-                    _paq.push(['trackContentInteraction', 'click', '[{$_setting}]', '[{$_setting}]', 'http://www.example.com']);
+                    _paq.push(['trackContentInteraction', 'click', '[{$_setting}]', '[{$_setting}]', '[{$oViewConf->getHomeLink()}]']);
                 });
             [{/if}]
         [{/foreach}]

@@ -1,6 +1,13 @@
 <?php
-require_once dirname(__FILE__)."/PiwikTracker.php";
-class matomo extends PiwikTracker
+
+namespace Bla\Matomo\Files;
+
+use OxidEsales\Eshop\Core\Registry;
+use OxidEsales\Eshop\Core\Controller\BaseController;
+use OxidEsales\Eshop\Core\ViewConfig;
+
+
+class Matomo extends PiwikTracker
 {
 	public function __construct()
 	{
@@ -15,7 +22,8 @@ class matomo extends PiwikTracker
 	 */
 	protected function _getMatomoUrl()
 	{
-		if ( $this->_url === null ) $this->_url = ( parse_url(oxRegistry::getConfig()->getConfigParam('blaMatomo_sUrl'),PHP_URL_HOST) ? "https://".parse_url(oxRegistry::getConfig()->getConfigParam('blaMatomo_sUrl'),PHP_URL_HOST)."/" : false );
+		if ( $this->_url === null )
+		    $this->_url = ( parse_url(Registry::getConfig()->getConfigParam('blaMatomo_sUrl'),PHP_URL_HOST) ? "https://".parse_url(Registry::getConfig()->getConfigParam('blaMatomo_sUrl'),PHP_URL_HOST)."/".parse_url(Registry::getConfig()->getConfigParam('blaMatomo_sUrl'),PHP_URL_PATH)."/" : false );
 		return $this->_url;
 	}
 	protected $_url = null;
@@ -27,7 +35,7 @@ class matomo extends PiwikTracker
 	 */
 	protected function _getMatomoToken()
 	{
-		if ($this->_token === null) $this->_token = ( oxRegistry::getConfig()->getConfigParam('blaMatomo_sToken') ? oxRegistry::getConfig()->getConfigParam('blaMatomo_sToken') : false );
+		if ($this->_token === null) $this->_token = ( Registry::getConfig()->getConfigParam('blaMatomo_sToken') ? Registry::getConfig()->getConfigParam('blaMatomo_sToken') : false );
 		return $this->_token;
 	}
 	protected $_token = null;
@@ -39,7 +47,7 @@ class matomo extends PiwikTracker
 	 */
 	protected function _getMatomoSiteID()
 	{
-		if ($this->_siteid === null) $this->_siteid = ( intval(oxRegistry::getConfig()->getConfigParam('blaMatomo_iSiteID')) ? intval(oxRegistry::getConfig()->getConfigParam('blaMatomo_iSiteID')) : false );
+		if ($this->_siteid === null) $this->_siteid = ( intval(Registry::getConfig()->getConfigParam('blaMatomo_iSiteID')) ? intval(Registry::getConfig()->getConfigParam('blaMatomo_iSiteID')) : false );
 		return $this->_siteid;
 	}
 	protected $_siteid = null;
@@ -49,12 +57,12 @@ class matomo extends PiwikTracker
 	 * @param oxView $oView
 	 * @return string
 	 */
-	public function getDocumentTitle(oxView $oView = null)
+	public function getDocumentTitle(BaseController $oView = null)
 	{
-		if(!$oView) $oView = oxRegistry::getConfig()->getActiveView();
-		$oLang = oxRegistry::getLang();
+		if(!$oView) $oView = Registry::getConfig()->getActiveView();
+		$oLang = Registry::getLang();
 		$sTitle = "";
-		switch ($oView->getClassName())
+		switch ($oView->getClassKey())
 		{
 			case "start":
 				$sTitle = $oLang->translateString("HOME");
@@ -106,19 +114,19 @@ class matomo extends PiwikTracker
 	}
 
 	/** generate matomo js tracking code  */
-	public function getMatomoJSTracking(oxViewConfig $oViewConf)
+	public function getMatomoJSTracking(ViewConfig $oViewConf)
 	{
 		if(!$this->_getMatomoUrl() || !$this->_getMatomoSiteID()) return "";
 		/** @var matomo $matomo */
-		$matomo = oxRegistry::get("matomo");
+		$matomo = Registry::get(Matomo::class);
 		return '<!-- Matomo --><script type="text/javascript">var _paq = window._paq || '.json_encode($this->getTrackingObject($oViewConf)).
 			';(function(){var d = document, g = d.createElement("script"), s = d.getElementsByTagName("script")[0];g.type = "text/javascript";g.defer = true;g.async = true;g.src = "'.$this->_getMatomoUrl().'piwik.js";s.parentNode.insertBefore(g, s);'.
 			'})();</script><!-- /Matomo -->';
 	}
 
-	public function getTrackingObject(oxViewConfig $oViewConf)
+	public function getTrackingObject(ViewConfig $oViewConf)
 	{
-		$oConfig = oxRegistry::getConfig(); /** @var oxConfig $oConfig */
+		$oConfig = Registry::getConfig(); /** @var oxConfig $oConfig */
 		$oView = $oConfig->getActiveView(); /** @var oxView $oShop */
 		//$oShop = oxRegistry::getConfig()->getActiveShop(); /** @var oxShop $oShop */
 		$oUser = $oConfig->getUser();
@@ -138,7 +146,7 @@ class matomo extends PiwikTracker
 			['enableHeartBeatTimer'], // Accurately measure the time spent on each page
 		];
 
-		$cl = $oView->getClassName();
+		$cl = $oView->getClassKey();
 
 		if ( $cl === "search" ) $_paq[] =  ['trackSiteSearch', $oView->getSearchParamForHtml(), false, $oView->getArticleCount()];
 		else
@@ -185,8 +193,8 @@ class matomo extends PiwikTracker
 			$oBasket = $oView->getBasket();
 
 			if($iPaymentDim) $_paq[] = ['setCustomDimension', $iPaymentDim, $oPayment->oxpayments__oxdesc->value ]; // payment method
-			if($iDeliveryMethodDim) $_paq[] = ['setCustomDimension', $iDeliveryMethodDim, $oShipSet->oxdeliveryset__oxtitle->value.($oBasket->getDeliveryCosts() ? " ".$oBasket->getFDeliveryCosts() : "")  ]; // delivery method
-			if( $iDeliveryAddressDim ) $_paq[] = ['setCustomDimension', $iDeliveryAddressDim, oxRegistry::getLang()->translateString( (oxRegistry::getSession()->getVariable('blshowshipaddress') === "1" ? "MATOMO_SHIPPING_ADDRESS" : "BILLING_ADDRESS") )];
+			if($iDeliveryMethodDim) $_paq[] = ['setCustomDimension', $iDeliveryMethodDim, $oShipSet->oxdeliveryset__oxtitle->value.($oBasket->getDeliveryCost() ? " ".$oBasket->getDeliveryCost()->getBruttoPrice() : "")  ]; // delivery method
+			if( $iDeliveryAddressDim ) $_paq[] = ['setCustomDimension', $iDeliveryAddressDim, Registry::getLang()->translateString( (Registry::getSession()->getVariable('blshowshipaddress') === "1" ? "MATOMO_SHIPPING_ADDRESS" : "BILLING_ADDRESS") )];
 
 		}
 		else if ( $cl === "thankyou" ) // hier passiert nix wichtiges
@@ -275,7 +283,7 @@ class matomo extends PiwikTracker
 		if ( !$this->_getMatomoUrl() || !$this->_getMatomoSiteID() ) return "<!-- matomo tracking error: matomo url is not configured -->";
 		if ( !isset($params["track"]) ) return "<!-- matomo tracking error: params missing, please read module manual -->";
 
-		if ( $oUser = oxRegistry::getConfig()->getUser() ) $this->setUserId( md5($oUser->oxuser__oxusername->value) );
+		if ( $oUser = Registry::getConfig()->getUser() ) $this->setUserId( md5($oUser->oxuser__oxusername->value) );
 		$url = '';
 
 		switch ( $params["track"] ) {

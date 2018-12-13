@@ -21,19 +21,26 @@
  * @license     GPLv3
  */
 
-class oxviewconfig_matomo extends oxviewconfig_matomo_parent
+namespace Bla\Matomo\Core;
+
+use Bla\Matomo\Files\Matomo;
+use OxidEsales\Eshop\Core\Registry;
+use OxidEsales\Eshop\Core\DatabaseProvider;
+
+class ViewConfig extends ViewConfig_parent
 {
 	public function getMatomoJSTracking() {
-		return oxRegistry::get("matomo")->getMatomoJSTracking($this);
+		$oMatomo = oxNew(Matomo::class);
+	    return $oMatomo->getMatomoJSTracking($this);
 	}
 
 	// pure php tracking
 	public function matomoTrackPageView() {
-		oxRegistry::get("matomo")->apiTracking("PageView");
+		Registry::get(Matomo::class)->apiTracking("PageView");
 	}
 	public function matomoTrackGoal($goal) {}
 	public function matomoTrackSearch() {
-		oxRegistry::get("matomo")->apiTracking("Search",oxRegistry::getConfig()->getActiveView());
+		Registry::get(Matomo::class)->apiTracking("Search",Registry::getConfig()->getActiveView());
 	}
 
 	/**
@@ -44,9 +51,9 @@ class oxviewconfig_matomo extends oxviewconfig_matomo_parent
 	protected $_originCountry = null;
 	public function getCountryByIP()
 	{
-		$oUtilsServer = oxRegistry::get("oxUtilsServer");
+		$oUtilsServer = Registry::get("oxUtilsServer");
 		if( $_originCountry = $oUtilsServer->getOxCookie("_originCountry") ) $this->_originCountry = $_originCountry;
-		else if($result = oxRegistry::get("matomo")->getCountryByIP())
+		else if($result = Registry::get(Matomo::class)->getCountryByIP())
 		{
 			$UserCountry = (object) array_shift(unserialize($result));
 			$oUtilsServer->setOxCookie("_originCountry",$UserCountry->country_code,time()+60*60*24*30);
@@ -74,7 +81,7 @@ class oxviewconfig_matomo extends oxviewconfig_matomo_parent
 
     public function getMatomoMaxCustVar()
     {
-        if ($this->_matomoMaxCustVar === null) $this->_matomoMaxCustVar = intval(oxRegistry::getConfig()->getConfigParam('blaMatomo_iMaxCustVar'));
+        if ($this->_matomoMaxCustVar === null) $this->_matomoMaxCustVar = intval(Registry::getConfig()->getConfigParam('blaMatomo_iMaxCustVar'));
 
         return $this->_matomoMaxCustVar;
     }
@@ -88,7 +95,7 @@ class oxviewconfig_matomo extends oxviewconfig_matomo_parent
     protected $_matomoNlgoalId = null;
     public function getMatomoNlgoalid()
     {
-        if ($this->_matomoNlgoalId === null) $this->_matomoNlgoalId = intval(oxRegistry::getConfig()->getConfigParam('blaMatomo_iNewsgoalid'));
+        if ($this->_matomoNlgoalId === null) $this->_matomoNlgoalId = intval(Registry::getConfig()->getConfigParam('blaMatomo_iNewsgoalid'));
         return $this->_matomoNlgoalId;
     }
 
@@ -102,7 +109,7 @@ class oxviewconfig_matomo extends oxviewconfig_matomo_parent
     protected $_matomoCustomIndexNewsletter = null;
     public function getMatomoCustomIndexNewsletter()
     {
-        if ($this->_matomoCustomIndexNewsletter === null) $this->_matomoCustomIndexNewsletter = intval(oxRegistry::getConfig()->getConfigParam('blaMatomo_iCustindexNewsletter'));
+        if ($this->_matomoCustomIndexNewsletter === null) $this->_matomoCustomIndexNewsletter = intval(Registry::getConfig()->getConfigParam('blaMatomo_iCustindexNewsletter'));
         return $this->_matomoCustomIndexNewsletter;
     }
 
@@ -116,7 +123,7 @@ class oxviewconfig_matomo extends oxviewconfig_matomo_parent
     protected $_matomoCustomIndexPayment = null;
     public function getMatomoCustomIndexPayment()
     {
-        if ($this->_matomoCustomIndexPayment === null) $this->_matomoCustomIndexPayment = intval(oxRegistry::getConfig()->getConfigParam('blaMatomo_iCustindexPayment'));
+        if ($this->_matomoCustomIndexPayment === null) $this->_matomoCustomIndexPayment = intval(Registry::getConfig()->getConfigParam('blaMatomo_iCustindexPayment'));
         return $this->_matomoCustomIndexPayment;
     }
 
@@ -132,7 +139,7 @@ class oxviewconfig_matomo extends oxviewconfig_matomo_parent
     protected $_matomoFirstReferrerConv = null;
     public function getFirstReferrerConv()
     {
-        if ($this->_matomoFirstReferrerConv === null) $this->_matomoFirstReferrerConv = oxRegistry::getConfig()->getConfigParam('blaMatomo_blFirstReferrerConv');
+        if ($this->_matomoFirstReferrerConv === null) $this->_matomoFirstReferrerConv = Registry::getConfig()->getConfigParam('blaMatomo_blFirstReferrerConv');
         return $this->_matomoFirstReferrerConv;
     }
 
@@ -148,7 +155,7 @@ class oxviewconfig_matomo extends oxviewconfig_matomo_parent
     protected $_matomoEnableJSError = null;
     public function getMatomoEnableJSError()
     {
-        if ($this->_matomoEnableJSError === null) $this->_matomoEnableJSError = oxRegistry::getConfig()->getConfigParam('blaMatomo_blEnableJSErrorTrackin');
+        if ($this->_matomoEnableJSError === null) $this->_matomoEnableJSError = Registry::getConfig()->getConfigParam('blaMatomo_blEnableJSErrorTrackin');
         return $this->_matomoEnableJSError;
     }
 
@@ -161,7 +168,7 @@ class oxviewconfig_matomo extends oxviewconfig_matomo_parent
      */
     public function getMatomoText($textIdentifier)
     {
-        $cfg = oxRegistry::get('oxConfig');
+        $cfg = Registry::get('oxConfig');
         switch ($textIdentifier) {
             case 'Newsletter':
                 return $cfg->getConfigParam('blaMatomo_sCustomvarNewsletter');
@@ -211,7 +218,7 @@ class oxviewconfig_matomo extends oxviewconfig_matomo_parent
     {
         $ret = '';
         $aParamMap = null;
-        $cfg = oxRegistry::get('oxConfig');
+        $cfg = Registry::get('oxConfig');
         switch ($sScope) {
             case 'visit':
                 $aParamMap = $cfg->getConfigParam('blaMatomo_aParamMapVisit');
@@ -276,7 +283,7 @@ class oxviewconfig_matomo extends oxviewconfig_matomo_parent
 
     public function getAllMatomoCtSettings()
     {
-        return oxDb::getDb()->GetCol('SELECT SUBSTR(oxvarname,13) FROM oxconfig WHERE oxmodule = "module:matomo" AND oxvarname LIKE "blaMatomo_ct_%"');
+        return DatabaseProvider::getDb()->GetCol('SELECT SUBSTR(oxvarname,13) FROM oxconfig WHERE oxmodule = "module:bla-matomo" AND oxvarname LIKE "blaMatomo_ct_%"');
     }
     /**
      * returns settings for matomo content tracking
@@ -286,6 +293,6 @@ class oxviewconfig_matomo extends oxviewconfig_matomo_parent
      */
     public function getMatomoCtSetting($var)
     {
-        return oxRegistry::getConfig()->getConfigParam("blaMatomo_ct_{$var}");
+        return Registry::getConfig()->getConfigParam("blaMatomo_ct_{$var}");
     }
 }

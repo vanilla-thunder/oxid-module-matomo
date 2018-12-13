@@ -1,6 +1,6 @@
 <?php
 /**
- * [bla] matomo
+ * Matomo (Piwik) Analytics for OXID eShop
  * Copyright (C) 2018  bestlife AG
  * info:  oxid@bestlife.ag
  *
@@ -100,5 +100,4 @@ $aLang = [
 	'SHOP_MODULE_blaMatomo_ct_pricealarm'          => 'jQuery Selector für Preisalarm (Tab) Trigger',
 	'SHOP_MODULE_blaMatomo_ct_tags'                => 'jQuery Selector für Produkt-Tags (Tab) Trigger',
 	'SHOP_MODULE_blaMatomo_ct_productFbComments'   => 'jQuery Selector für Facebook Kommentare (tab) Trigger',
-
 ];
