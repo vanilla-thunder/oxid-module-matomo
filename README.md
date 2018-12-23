@@ -15,7 +15,7 @@ version 2.4.0 ( 2018-11-30 )
 4. Views aktualisieren
 5. TPL Blocks hinzufügen: in **email/html/header.tpl** direkt nach ``<body ... >``  einfügen:  
     ````
-    [{block name="email_html_header_tracking"}][{/block}]
+    [{block name="email_html_header"}][{/block}]
     ````
 
 ## Konfiguration:
