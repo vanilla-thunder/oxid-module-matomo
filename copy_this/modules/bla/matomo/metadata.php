@@ -65,8 +65,8 @@ $aModule = [
     'blocks'      => [
         ['template' => 'layout/base.tpl', 'block' => 'head_meta_robots', 'file' => '/application/views/blocks/head_meta_robots.tpl'],
 		['template' => 'layout/base.tpl', 'block' => 'base_js', 'file' => '/application/views/blocks/base_js.tpl'],
-		['template' => 'email/html/header.tpl', 'block' => 'email_html_header_tracking', 'file' => '/application/views/blocks/email_html_header_tracking.tpl']
-    ],
+		['template' => 'email/html/header.tpl', 'block' => 'email_html_header', 'file' => '/application/views/blocks/email_html_header_tracking.tpl'],
+	],
     'settings'    => [
         ['group' => 'blaMatomo_Main', 'name' => 'blaMatomo_sUrl', 'type' => 'str', 'value' => ''],
         ['group' => 'blaMatomo_Main', 'name' => 'blaMatomo_sToken', 'type' => 'str', 'value' => ''],
