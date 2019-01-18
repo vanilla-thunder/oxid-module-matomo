@@ -21,9 +21,9 @@
  * @license     GPLv3
  */
 
-namespace Bla\Matomo\Core;
+namespace Bla\Matomo\Application\Core;
 
-use Bla\Matomo\Files\Matomo;
+use Bla\Matomo\Application\Files\Matomo;
 use OxidEsales\Eshop\Core\Registry;
 use OxidEsales\Eshop\Core\DatabaseProvider;
 

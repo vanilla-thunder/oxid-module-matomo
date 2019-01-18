@@ -1,6 +1,6 @@
 <?php
 
-namespace Bla\Matomo\Files;
+namespace Bla\Matomo\Application\Files;
 
 /**
  * Piwik - free/libre analytics platform

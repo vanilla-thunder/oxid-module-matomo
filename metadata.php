@@ -61,17 +61,17 @@ $aModule = [
     'email'       => 'oxid@bestlife.ag',
     'url'         => 'https://github.com/vanilla-thunder/oxid-module-matomo',
     'extend'      => [
-        \OxidEsales\Eshop\Core\ViewConfig::class => Bla\Matomo\Core\ViewConfig::class,
-        \OxidEsales\Eshop\Core\UtilsView::class => Bla\Matomo\Core\UtilsView::class
+        \OxidEsales\Eshop\Core\ViewConfig::class => Bla\Matomo\Application\Core\ViewConfig::class,
+        \OxidEsales\Eshop\Core\UtilsView::class => Bla\Matomo\Application\Core\UtilsView::class
     ],
     'controllers' => [
-        "matomo"  => Bla\Matomo\Files\Matomo::class
+        "matomo"  => Bla\Matomo\Application\Files\Matomo::class
     ],
     'blocks'      => [
-        ['template' => 'layout/base.tpl', 'block' => 'base_style', 'file' => '/views/blocks/matomo.tpl'],
-        ['template' => 'layout/base.tpl', 'block' => 'base_js', 'file' => '/views/blocks/base_js.tpl'],
-        ['template' => 'layout/base.tpl', 'block' => 'head_meta_robots', 'file' => '/views/blocks/head_meta_robots.tpl'],
-        ['template' => 'email/html/header.tpl', 'block' => 'email_html_header_tracking', 'file' => '/views/blocks/email_html_header_tracking.tpl'],
+        ['template' => 'layout/base.tpl', 'block' => 'base_style', 'file' => '/application/views/blocks/matomo.tpl'],
+        ['template' => 'layout/base.tpl', 'block' => 'base_js', 'file' => '/application/views/blocks/base_js.tpl'],
+        ['template' => 'layout/base.tpl', 'block' => 'head_meta_robots', 'file' => '/application/views/blocks/head_meta_robots.tpl'],
+        ['template' => 'email/html/header.tpl', 'block' => 'email_html_header_tracking', 'file' => '/application/views/blocks/email_html_header_tracking.tpl'],
     ],
     'settings'    => [
         ['group' => 'blaMatomo_Main', 'name' => 'blaMatomo_sUrl', 'type' => 'str', 'value' => ''],

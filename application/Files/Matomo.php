@@ -1,6 +1,6 @@
 <?php
 
-namespace Bla\Matomo\Files;
+namespace Bla\Matomo\Application\Files;
 
 use OxidEsales\Eshop\Core\Registry;
 use OxidEsales\Eshop\Core\Controller\BaseController;
