@@ -1,4 +1,7 @@
 <?php
+
+namespace Bla\Matomo\Application\Files;
+
 /**
  * Piwik - free/libre analytics platform
  *
@@ -19,6 +22,7 @@
  * @package PiwikTracker
  * @api
  */
+
 class PiwikTracker
 {
     /**

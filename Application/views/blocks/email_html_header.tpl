@@ -1,5 +1,5 @@
 [{*
- * [bla] ___MODULE___
+ * [bla] matomo
  * Copyright (C) 2018  bestlife AG
  * info:  oxid@bestlife.ag
  *
@@ -25,4 +25,4 @@
  * @license     GPLv3
  *}]
 [{$smarty.block.parent}]
-[{$oViewConf->getMatomoJSTracking()}]
+[{matomo track="PageView" title="EMAIL"|oxmultilangassign|cat:"/"|cat:$title}]

@@ -1,5 +1,5 @@
-## [bla] matomo - Matomo (Piwik) Analytics for OXID eShop
-version 2.4.0 ( 2018-11-30 )
+## [bla] matomo - Matomo (Piwik) Analytics für OXID eShop
+version 2.5.0 ( 2019-01-23 )
 
 ## Funktionen:
 1. Tracking der Seitenaufrufe
@@ -8,14 +8,19 @@ version 2.4.0 ( 2018-11-30 )
 4. benutzerdefinierte Dimensionen
 5. Geo Location ( Besucher-IP nach Land auflösen ) 
 
-##  Installation:
-1. [https://github.com/vanilla-thunder/oxid-module-matomo/archive/master.zip](https://github.com/vanilla-thunder/oxid-module-matomo/archive/master.zip) herunterladen und entpacken
+## Installation OXID 6
+````
+$ composer require weiß-noch/nicht-was
+````
+
+##  Installation OXID 4
+1. [https://github.com/vanilla-thunder/oxid-module-matomo/archive/master-v4.zip](https://github.com/vanilla-thunder/oxid-module-matomo/archive/master-v4.zip) herunterladen und entpacken
 2. Inhalt von "copy_this" in den Shop hochladen
 3. Modul aktivieren und Moduleinstellungen konfigurieren
 4. Views aktualisieren
 5. TPL Blocks hinzufügen: in **email/html/header.tpl** direkt nach ``<body ... >``  einfügen:  
     ````
-    [{block name="email_html_header_tracking"}][{/block}]
+    [{block name="email_html_header"}][{/block}]
     ````
 
 ## Konfiguration:
@@ -60,8 +65,8 @@ Weitere Infos zu Geo Location in Matomo: https://matomo.org/docs/geo-locate/
 Beipsiel Code: ``[{if $oViewConf->getCountryByIP() == "DE"}]Kunde aus DE[{/if}]`` 
 
 
-### LICENSE AGREEMENT
-   [bla] matomo - Matomo (Piwik) Analytics for OXID eShop  
+### Software Lizenz
+   [bla] matomo - Matomo (Piwik) Analytics für OXID eShop  
    Copyright (C) 2018 bestlife AG  
    info:  oxid@bestlife.ag  
   
