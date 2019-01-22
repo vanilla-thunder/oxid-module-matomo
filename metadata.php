@@ -65,10 +65,13 @@ $aModule = [
         \OxidEsales\Eshop\Core\UtilsView::class => Bla\Matomo\Application\Core\UtilsView::class
     ],
     'controllers' => [
-        "matomo"  => Bla\Matomo\Application\Files\Matomo::class
+        'matomo'  => Bla\Matomo\Application\Files\Matomo::class
+    ],
+    'events'       => [
+        'onActivate'   => 'Bla\Matomo\Application\Core\Events::onActivate',
+        'onDeactivate' => 'Bla\Matomo\Application\Core\Events::onDeactivate',
     ],
     'blocks'      => [
-        ['template' => 'layout/base.tpl', 'block' => 'base_style', 'file' => '/application/views/blocks/matomo.tpl'],
         ['template' => 'layout/base.tpl', 'block' => 'base_js', 'file' => '/application/views/blocks/base_js.tpl'],
         ['template' => 'layout/base.tpl', 'block' => 'head_meta_robots', 'file' => '/application/views/blocks/head_meta_robots.tpl'],
         ['template' => 'email/html/header.tpl', 'block' => 'email_html_header_tracking', 'file' => '/application/views/blocks/email_html_header_tracking.tpl'],
