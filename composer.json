@@ -1,6 +1,9 @@
 {
   "name": "bestlife/oxid-module-matomo",
   "description": "Add Matomo (formerly Piwik) tracking codes to your oxid online shop.",
+  "version": "2.5",
+  "type": "oxideshop-module",
+  "license": [ "GPL-3.0" ],
   "authors": [
     {
       "name": " bestlife AG",
@@ -8,9 +11,10 @@
       "homepage": "https://github.com/vanilla-thunder/oxid-module-matomo"
     }
   ],
-  "type": "oxideshop-module",
-  "license": "",
-  "version": "2.5",
+  "require": {
+    "php": ">=5.6",
+    "oxid-esales/oxideshop-ce": "^v6.0"
+  },
   "autoload": {
     "psr-4": {
       "Bla\\Matomo\\": "./"
