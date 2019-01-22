@@ -10,7 +10,7 @@ version 2.5.0 ( 2019-01-23 )
 
 ## Installation OXID 6
 ````
-$ composer require weiß-noch/nicht-was
+$ composer require bestlife/oxid-module-matomo
 ````
 
 ##  Installation OXID 4
