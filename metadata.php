@@ -58,7 +58,7 @@ $aModule = [
 		'de' => 'Fügt Matomo (ehemals Piwik) Tracking Codes in Ihren online Shops ein.<br/>Sie benötigen eine <a href="http://www.matomo.org" target="_blank">matomo</a> Installation, um dieses Modul zu nutzen.'
 	],
 	'thumbnail'   => 'bestlife.png',
-	'version'     => '2.5.0 (2019-01-23)',
+	'version'     => '2.5.1 (2020-10-06)',
 	'author'      => 'Klaus Weidenbach, Rafael Dabrowski, Marat Bedoev, bestlife AG',
 	'email'       => 'oxid@bestlife.ag',
 	'url'         => 'https://github.com/vanilla-thunder/oxid-module-matomo',
