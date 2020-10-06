@@ -21,6 +21,8 @@
  * @license     GPLv3
  *
  * changelog:
+ * --- 2020-10-06 :: version 2.5.1
+ * + added theme parameter to the blocks definition in metadata, big thanks to Mario Lorenz
  *
  * --- 2019-01-23 :: version 2.5
  * + updated to OXID eShop version 6.x with friendly help of Giedre and Keywan from OXID eSales
