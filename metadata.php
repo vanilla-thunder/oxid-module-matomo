@@ -73,16 +73,37 @@ $aModule = [
 	],
 	'blocks'      => [
 		[
+			'theme'    => 'flow',
 			'template' => 'layout/base.tpl',
 			'block'    => 'base_js',
 			'file'     => '/Application/views/blocks/base_js.tpl'
 		],
 		[
+			'theme'    => 'flow',
 			'template' => 'layout/base.tpl',
 			'block'    => 'head_meta_robots',
 			'file'     => '/Application/views/blocks/head_meta_robots.tpl'
 		],
 		[
+			'theme'    => 'flow',
+			'template' => 'email/html/header.tpl',
+			'block'    => 'email_html_header',
+			'file'     => '/Application/views/blocks/email_html_header.tpl'
+		],
+		[
+			'theme'    => 'wave',
+			'template' => 'layout/base.tpl',
+			'block'    => 'base_js',
+			'file'     => '/Application/views/blocks/base_js.tpl'
+		],
+		[
+			'theme'    => 'wave',
+			'template' => 'layout/base.tpl',
+			'block'    => 'head_meta_robots',
+			'file'     => '/Application/views/blocks/head_meta_robots.tpl'
+		],
+		[
+			'theme'    => 'wave',
 			'template' => 'email/html/header.tpl',
 			'block'    => 'email_html_header',
 			'file'     => '/Application/views/blocks/email_html_header.tpl'
