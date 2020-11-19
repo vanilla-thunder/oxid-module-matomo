@@ -48,8 +48,6 @@
  */
 $sMetadataVersion = '2.0';
 
-$oLang = \OxidEsales\Eshop\Core\Registry::getLang();
-
 $aModule = [
 	'id'          => 'matomo',
 	'title'       => '<strong style="color:#95b900;font-size:125%;">best</strong><strong style="color:#c4ca77;font-size:125%;">life</strong> <strong>Matomo Tracking (ehemals Piwik)</strong>',
