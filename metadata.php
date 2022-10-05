@@ -108,6 +108,21 @@ $aModule = [
 			'block'    => 'email_html_header',
 			'file'     => '/Application/views/blocks/email_html_header.tpl'
 		],
+        [
+            'template' => 'layout/base.tpl',
+            'block'    => 'base_js',
+            'file'     => '/Application/views/blocks/base_js.tpl'
+        ],
+        [
+            'template' => 'layout/base.tpl',
+            'block'    => 'head_meta_robots',
+            'file'     => '/Application/views/blocks/head_meta_robots.tpl'
+        ],
+        [
+            'template' => 'email/html/header.tpl',
+            'block'    => 'email_html_header',
+            'file'     => '/Application/views/blocks/email_html_header.tpl'
+        ],
 	],
 	'settings'    => [
 		[
