@@ -206,7 +206,7 @@ class Matomo extends PiwikTracker
 			// add products to basket
 			foreach ( $oBasket->getContents() as $_index => $_basketitem )
 			{
-				$_article = $_basketitem->getArticle();
+				$_article = $_basketitem->getArticle(false); // don't check if product is buyable and visible
 				$_category = $_article->getCategory();
 				$_unitprice = $_basketitem->getUnitPrice();
 
